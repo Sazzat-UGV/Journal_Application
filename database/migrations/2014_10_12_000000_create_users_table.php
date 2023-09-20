@@ -15,6 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('designation');
+            $table->string('department');
+            $table->string('semester');
+            $table->string('student_id');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('image')->default('default_user.jpg');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_active')->default(true);

@@ -6,5 +6,6 @@
 <link rel="stylesheet" href="{{ asset('assets/Backend') }}/plugins/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="{{ asset('assets/Backend') }}/css/style.css">
 
+<link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 @stack('admin_style')

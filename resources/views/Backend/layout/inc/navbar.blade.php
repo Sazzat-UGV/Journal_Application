@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <a class="dropdown-item" href="profile.html">My Profile</a>
-                <a class="dropdown-item" href="inbox.html">Change Password</a>
+                <a class="dropdown-item" href="{{ route('admin.changepasswordpage') }}">Change Password</a>
                 <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a>
             </div>
         </li>

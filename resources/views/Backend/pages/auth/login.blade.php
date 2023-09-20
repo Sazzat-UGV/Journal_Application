@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/Backend') }}/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="{{ asset('assets/Backend') }}/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/Backend') }}/css/style.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 </head>
 
 <body>
@@ -64,6 +65,9 @@
     <script src="{{ asset('assets/Backend') }}/js/popper.min.js"></script>
     <script src="{{ asset('assets/Backend') }}/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ asset('assets/Backend') }}/js/script.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
 </body>
 
 </html>
