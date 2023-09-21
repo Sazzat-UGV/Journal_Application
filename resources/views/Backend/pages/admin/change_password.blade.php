@@ -3,14 +3,19 @@
     Change Password
 @endsection
 @section('content')
+    @include('Backend.layout.inc.breadcumb', [
+        'page_name' => 'Change Password',
+        'main_page_name' => 'Dashboard',
+        'sub_page_name' => 'Change Password',
+        'main_page_url' => route('admin.dashboard'),
+    ])
     <div class="card-body">
-        <h5 class="card-title">Change Password</h5>
         <div class="row">
             <div class="col-md-10 col-lg-6">
                 <form action="{{ route('admin.changepassword') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Old Password</label>
+                        <label>Old Password <span class="text-danger">*</span></label>
                         <input type="password" name="old_password"
                             class="form-control @error('old_password')
                 is-invalid
@@ -21,7 +26,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>New Password</label>
+                        <label>New Password <span class="text-danger">*</span></label>
                         <input type="password" name="new_password"
                             class="form-control @error('new_password')
                 is-invalid
@@ -32,7 +37,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Confirm Password</label>
+                        <label>Confirm Password <span class="text-danger">*</span></label>
                         <input type="password" name="confirm_password" class="form-control">
                     </div>
 
