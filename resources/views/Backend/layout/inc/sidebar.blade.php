@@ -3,7 +3,17 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="submenu active">
-                    <a href="{{ route('admin.dashboard') }}"><i class="fas fa-user-graduate"></i> <span> Dashboard</span></a>
+                    <a href="{{ route('admin.dashboard') }}"><i class="fas fa-user-graduate"></i> <span>
+                            Dashboard</span></a>
+                </li>
+
+                <li class="submenu">
+                    <a href="#"><i class="fas fa-user-alt"></i> <span> System Admin Settings</span> <span
+                            class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('systemadmin.index') }}">Admin List</a></li>
+                        <li><a href="{{ route('systemadmin.create') }}">Add New Admin</a></li>
+                    </ul>
                 </li>
 
 

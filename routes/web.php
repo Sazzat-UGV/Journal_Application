@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\SystemAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,14 @@ Route::prefix('admin')->group(function () {
     Route::put('update/profile/image/{id}',[AdminController::class,'saveImage'])->name('admin.saveImage');
     Route::get('change/profile',[AdminController::class,'changeProfilePage'])->name('admin.changeProfilePage');
     Route::put('update/profile/{id}',[AdminController::class,'changeProfile'])->name('admin.changeProfile');
+
     /*admin dashboard*/
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+    /*resource controller*/
+    Route::resource('systemadmin',SystemAdminController::class);
+
+    /*Ajax call*/
+    Route::get('/check/is_active/{id}',[SystemAdminController::class,'changeStatus'])->name('admin.changeStatus');
+
 });
