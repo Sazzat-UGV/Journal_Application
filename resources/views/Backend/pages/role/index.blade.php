@@ -1,0 +1,135 @@
+@extends('Backend.layout.master')
+@section('title')
+    Index Role
+@endsection
+@push('admin_style')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+@endpush
+@section('content')
+    @include('Backend.layout.inc.breadcumb', [
+        'page_name' => 'Index Role',
+        'main_page_name' => 'System Role Settings',
+        'sub_page_name' => 'Index Role',
+        'main_page_url' => route('role.index'),
+    ])
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 pb-3">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('role.create') }}" class="btn btn-primary me-4"><i class="fas fa-plus-circle"></i>
+                        Add New
+                        Role</a>
+                </div>
+            </div>
+            <div class="table-responsive text-nowrap my-3">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class=" text-center">
+                            <th>#</th>
+                            <th>Last Updated</th>
+                            <th>Role Name</th>
+                            <th>Permissions</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @forelse ($roles as $index=>$role)
+                            <tr>
+                                <td><strong>{{ $index + 1 }}</strong></td>
+                                <td>{{ $role->updated_at->format('d-M-Y') }}</td>
+                                <td>{{ $role->role_name }}</td>
+                                <td>
+                                    @foreach ($role->permissions->chunk(5) as $key => $chunks)
+                                        <div class="row">
+                                            <div class="col">
+                                                @foreach ($chunks as $permission)
+                                                    <span class="badge bg-success">{{ $permission->permission_slug }}</span>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </td>
+                                <td class="text-right">
+                                    <div class="actions">
+                                        <a href="{{ route('role.edit', $role->id) }}"
+                                            class="btn btn-sm bg-success-light mr-1">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+@endsection
+@push('admin_script')
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                pagingType: 'first_last_numbers',
+            });
+
+
+            $('.toggle-class').change(function() {
+                var is_active = $(this).prop('checked') == true ? 1 : 0;
+                var item_id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '/admin/check/is_active/' + item_id,
+                    success: function(response) {
+                        console.log(response);
+                        Swal.fire(
+                            'Status Updated!',
+                            'Click ok button!',
+                            'success'
+                        )
+                    },
+                    errro: function(err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    }
+                });
+            });
+
+
+            $('.show_confirm').click(function(event) {
+                let form = $(this).closest('form');
+                event.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+            })
+
+
+
+        });
+    </script>
+@endpush
