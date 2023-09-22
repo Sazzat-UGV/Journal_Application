@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Backend.layout.master');
+    return view('errors.404');
 });
 
 

@@ -16,6 +16,8 @@ class ModuleSeeder extends Seeder
     {
         $module_array = [
             'Admin Dashboard',
+            'System Admin Settings',
+            'System Role Settings',
         ];
 
         foreach ($module_array as $module) {

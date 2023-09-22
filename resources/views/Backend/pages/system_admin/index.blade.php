@@ -15,6 +15,7 @@
 
     <div class="card-body">
         <div class="row">
+            @can('create-admin')
             <div class="col-md-12 col-lg-12 col-sm-12 pb-3">
                 <div class="d-flex justify-content-end">
                     <a href="{{ route('systemadmin.create') }}" class="btn btn-primary me-4"><i class="fas fa-plus-circle"></i>
@@ -22,6 +23,7 @@
                         Admin</a>
                 </div>
             </div>
+            @endcan
             <div class="table-responsive text-nowrap my-3">
                 <table id="example" class="table table-striped" style="width:100%">
                     <thead>
@@ -32,8 +34,15 @@
                             <th>Admin Image</th>
                             <th>Admin Name</th>
                             <th>Admin Email</th>
+                            @can('edit-admin')
                             <th>Status</th>
+                            @endcan
+                            @if(
+                            Auth::user()->haspermission('edit-admin')||
+                            Auth::user()->haspermission('view-admin')||
+                            Auth::user()->haspermission('delete-admin'))
                             <th>Actions</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +55,7 @@
                                         class="w-25 rounded-circle"></td>
                                 <td>{{ Str::limit($admin->name, 25, '...') }}</td>
                                 <td>{{ Str::limit($admin->email, 25, '...') }}</td>
+                                @can('edit-admin')
                                 <td>
                                     <div class="custom-control custom-switch">
                                         <input class="custom-control-input toggle-class" type="checkbox"
@@ -54,27 +64,39 @@
                                         <label class="custom-control-label" for="admin-{{ $admin->id }}"></label>
                                     </div>
                                 </td>
+                                @endcan
+                                @if(Auth::user()->haspermission('edit-admin')||
+                                Auth::user()->haspermission('view-admin')||
+                                Auth::user()->haspermission('delete-admin'))
+
                                 <td class="text-right">
-                                    <div class="actions">
+                                    <div class="actions d-flex justify-content-end">
+                                        @can('edit-admin')
                                         <a href="{{ route('systemadmin.edit', $admin->id) }}"
                                             class="btn btn-sm bg-success-light mr-1">
                                             <i class="fas fa-pen"></i>
                                         </a>
+                                        @endcan
+                                        @can('view-admin')
                                         <a href="{{ route('systemadmin.show', $admin->id) }}"
                                             class="btn btn-sm bg-secondary-light border-dark mr-1">
                                             <i class="fas fa-eye"></i>
                                         </a>
+                                        @endcan
+                                        @can('delete-admin')
                                         <form action="{{ route('systemadmin.destroy', $admin->id) }}" method="POST"
-                                            class="pt-1">
+                                            >
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="d-block btn btn-sm bg-danger-light show_confirm">
+                                            <button type="submit" class=" btn btn-sm bg-danger-light show_confirm">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
+                                        @endcan
 
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

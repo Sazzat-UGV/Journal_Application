@@ -7,23 +7,31 @@
                             Dashboard</span></a>
                 </li>
 
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-user-alt"></i> <span> System Admin Settings</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="{{ route('systemadmin.index') }}">Admin List</a></li>
-                        <li><a href="{{ route('systemadmin.create') }}">Add New Admin</a></li>
-                    </ul>
-                </li>
+                @can('index-admin')
+                    <li class="submenu">
+                        <a href="#"><i class="fas fa-user-alt"></i> <span> System Admin Settings</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="{{ route('systemadmin.index') }}">Admin List</a></li>
+                            @can('create-admin')
+                                <li><a href="{{ route('systemadmin.create') }}">Add New Admin</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
 
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-user-edit"></i> <span> System Role Settings</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="{{ route('role.index') }}">Role List</a></li>
-                        <li><a href="{{ route('role.create') }}">Add New Role</a></li>
-                    </ul>
-                </li>
+                @can('index-role')
+                    <li class="submenu">
+                        <a href="#"><i class="fas fa-user-edit"></i> <span> System Role Settings</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="{{ route('role.index') }}">Role List</a></li>
+                            @can('create-role')
+                                <li><a href="{{ route('role.create') }}">Add New Role</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
 
 
             </ul>

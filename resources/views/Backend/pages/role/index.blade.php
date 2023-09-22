@@ -15,6 +15,7 @@
 
     <div class="card-body">
         <div class="row">
+            @can('create-role')
             <div class="col-md-12 col-lg-12 col-sm-12 pb-3">
                 <div class="d-flex justify-content-end">
                     <a href="{{ route('role.create') }}" class="btn btn-primary me-4"><i class="fas fa-plus-circle"></i>
@@ -22,6 +23,7 @@
                         Role</a>
                 </div>
             </div>
+            @endcan
             <div class="table-responsive text-nowrap my-3">
                 <table class="table table-hover">
                     <thead>
@@ -30,7 +32,9 @@
                             <th>Last Updated</th>
                             <th>Role Name</th>
                             <th>Permissions</th>
+                            @can('edit-role')
                             <th>Actions</th>
+                            @endcan
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -44,12 +48,13 @@
                                         <div class="row">
                                             <div class="col">
                                                 @foreach ($chunks as $permission)
-                                                    <span class="badge bg-success">{{ $permission->permission_slug }}</span>
+                                                    <span class="badge bg-info-light">{{ $permission->permission_slug }}</span>
                                                 @endforeach
                                             </div>
                                         </div>
                                     @endforeach
                                 </td>
+                                @can('edit-role')
                                 <td class="text-right">
                                     <div class="actions">
                                         <a href="{{ route('role.edit', $role->id) }}"
@@ -58,6 +63,7 @@
                                         </a>
                                     </div>
                                 </td>
+                                @endcan
                             </tr>
                         @endforeach
                     </tbody>

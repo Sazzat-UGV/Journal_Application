@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AdminCreateRequest;
 use App\Http\Requests\AdminUpdateRequest;
@@ -19,6 +20,7 @@ class SystemAdminController extends Controller
      */
     public function index()
     {
+        Gate::authorize('index-admin');
         $admins = User::with('role:id,role_name')->whereNotIn('role_id', [1, 2])->select('id', 'name', 'image', 'role_id', 'email', 'is_active', 'updated_at')->latest('id')->get();
         return view('Backend.pages.system_admin.index', compact('admins'));
     }
@@ -28,6 +30,7 @@ class SystemAdminController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create-admin');
         $roles = Role::select('id', 'role_name')->whereNotIn('id', [1, 2])->get();
         return view('Backend.pages.system_admin.create', compact('roles'));
     }
@@ -37,6 +40,7 @@ class SystemAdminController extends Controller
      */
     public function store(AdminCreateRequest $request)
     {
+        Gate::authorize('create-admin');
         User::create([
             'role_id' => $request->role_id,
             'name' => $request->name,
@@ -54,6 +58,7 @@ class SystemAdminController extends Controller
      */
     public function show(string $id)
     {
+        Gate::authorize('view-admin');
         $user = User::with('role:id,role_name')->whereId($id)->first();
         return view('Backend.pages.system_admin.view', compact('user'));
     }
@@ -63,6 +68,7 @@ class SystemAdminController extends Controller
      */
     public function edit(string $id)
     {
+        Gate::authorize('edit-admin');
         $admin = User::findorFail($id);
         $roles = Role::select('id', 'role_name')->whereNotIn('id', [1, 2])->get();
         return view('Backend.pages.system_admin.edit', compact('admin', 'roles'));
@@ -73,6 +79,7 @@ class SystemAdminController extends Controller
      */
     public function update(AdminUpdateRequest $request, string $id)
     {
+        Gate::authorize('edit-admin');
         $admin = User::findorFail($id);
         $admin->update([
             'role_id' => $request->role_id,
@@ -90,6 +97,7 @@ class SystemAdminController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('delete-admin');
         $user = User::find($id);
         $user->delete();
         Toastr::success('Admin delete successfully');

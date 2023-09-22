@@ -24,8 +24,9 @@
                 </div>
             </div>
             <div class="col-12">
-                <form action="{{ route('role.store') }}" method="POST">
+                <form action="{{ route('role.update',$role->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
 
                     <div class="form-group">
                         <label>Role Name <span class="text-danger">*</span></label>
