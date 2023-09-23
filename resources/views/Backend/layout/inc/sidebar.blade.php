@@ -39,8 +39,21 @@
                                 class="menu-arrow"></span></a>
                         <ul>
                             <li><a href="{{ route('department.index') }}">Department List</a></li>
-                            @can('index-department')
+                            @can('create-department')
                                 <li><a href="{{ route('department.create') }}">Add New Department</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
+                @can('index-semester')
+                    <li class="submenu">
+                        <a href="#"><i class="fas fa-graduation-cap"></i> <span> Semesters</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="{{ route('semester.index') }}">Semester List</a></li>
+                            @can('create-semester')
+                                <li><a href="{{ route('semester.create') }}">Add New Semester</a></li>
                             @endcan
                         </ul>
                     </li>

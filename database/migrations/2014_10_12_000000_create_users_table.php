@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id')->constrained('roles');
             $table->foreignId('department_id')->nullable()->constrained('departments');
+            $table->foreignId('semester_id')->nullable()->constrained('semesters');
             $table->string('name');
             $table->string('slug');
             $table->string('email')->unique();
             // $table->string('designation')->nullable();
-            // $table->string('semester')->nullable();
             // $table->string('student_id')->nullable();
             $table->string('phone')->nullable();
             // $table->string('address')->nullable();

@@ -36,6 +36,12 @@ class PermissionSeeder extends Seeder
             'Edit Department',
             'Delete Department',
         ];
+        $adminSemesterPermissionArray = [
+            'Index Semester',
+            'Create Semester',
+            'Edit Semester',
+            'Delete Semester',
+        ];
 
 
         //Access Dashboard
@@ -74,6 +80,16 @@ class PermissionSeeder extends Seeder
                 'module_id' => $adminDepartmentModule->id,
                 'permission_name' => $adminDepartmentPermissionArray[$i],
                 'permission_slug' => Str::slug($adminDepartmentPermissionArray[$i]),
+            ]);
+        }
+
+        //semester management
+        $adminSemesterModule = Module::where('module_name', 'Semester Management')->select('id')->first();
+        for ($i = 0; $i < count($adminSemesterPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $adminSemesterModule->id,
+                'permission_name' => $adminSemesterPermissionArray[$i],
+                'permission_slug' => Str::slug($adminSemesterPermissionArray[$i]),
             ]);
         }
     }
