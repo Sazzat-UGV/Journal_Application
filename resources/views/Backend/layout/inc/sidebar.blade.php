@@ -33,6 +33,19 @@
                     </li>
                 @endcan
 
+                @can('index-department')
+                    <li class="submenu">
+                        <a href="#"><i class="fas fa-building"></i> <span> Departments</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="{{ route('department.index') }}">Department List</a></li>
+                            @can('index-department')
+                                <li><a href="{{ route('department.create') }}">Add New Department</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
 
             </ul>
         </div>

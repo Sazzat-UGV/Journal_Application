@@ -18,6 +18,7 @@ class ModuleSeeder extends Seeder
             'Admin Dashboard',
             'System Admin Settings',
             'System Role Settings',
+            'Department Management',
         ];
 
         foreach ($module_array as $module) {

@@ -30,6 +30,12 @@ class PermissionSeeder extends Seeder
             'Create Role',
             'Edit Role',
         ];
+        $adminDepartmentPermissionArray = [
+            'Index Department',
+            'Create Department',
+            'Edit Department',
+            'Delete Department',
+        ];
 
 
         //Access Dashboard
@@ -58,6 +64,16 @@ class PermissionSeeder extends Seeder
                 'module_id' => $adminRoleModule->id,
                 'permission_name' => $adminRolePermissionArray[$i],
                 'permission_slug' => Str::slug($adminRolePermissionArray[$i]),
+            ]);
+        }
+
+        //department management
+        $adminDepartmentModule = Module::where('module_name', 'Department Management')->select('id')->first();
+        for ($i = 0; $i < count($adminDepartmentPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $adminDepartmentModule->id,
+                'permission_name' => $adminDepartmentPermissionArray[$i],
+                'permission_slug' => Str::slug($adminDepartmentPermissionArray[$i]),
             ]);
         }
     }

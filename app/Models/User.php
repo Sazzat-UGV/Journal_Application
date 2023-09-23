@@ -28,6 +28,7 @@ class User extends Authenticatable
         'address',
         'image',
         'role_id',
+        'department_id',
         'password',
         'is_active',
     ];
@@ -52,17 +53,22 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-     /*relationship with role*/
-     public function role()
-     {
-         return $this->belongsTo(Role::class);
-     }
+    /*relationship with role*/
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 
 
-     /*relationship with permissions*/
-     //return either true or false
-     public function haspermission($permission_slug)
-     {
-         return $this->role->permissions()->where('permission_slug', $permission_slug)->first() ? true : false;
-     }
+    /*relationship with permissions*/
+    //return either true or false
+    public function haspermission($permission_slug)
+    {
+        return $this->role->permissions()->where('permission_slug', $permission_slug)->first() ? true : false;
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

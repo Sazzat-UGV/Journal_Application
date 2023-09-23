@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Auth\LoginController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SystemAdminController;
 use Illuminate\Support\Facades\Route;
@@ -49,8 +50,10 @@ Route::prefix('admin')->group(function () {
     /*resource controller*/
     Route::resource('systemadmin',SystemAdminController::class);
     Route::resource('role',RoleController::class);
+    Route::resource('department',DepartmentController::class);
 
     /*Ajax call*/
     Route::get('/check/is_active/{id}',[SystemAdminController::class,'changeStatus'])->name('admin.changeStatus');
+    Route::get('/check/department/is_active/{id}',[DepartmentController::class,'changeStatus'])->name('admin.changeStatus');
 
 });
