@@ -7,6 +7,7 @@ use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SemesterController;
 use App\Http\Controllers\Backend\SystemAdminController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('errors.404');
+Route::prefix('')->group(function () {
+    Route::get('/', [HomeController::class, 'homePage'])->name('homePage');
 });
 
 
@@ -40,23 +41,22 @@ Route::prefix('admin')->group(function () {
     Route::post('change_password', [AdminController::class, 'changePassword'])->name('admin.changepassword');
 
     /*admin profile route*/
-    Route::get('profile',[AdminController::class,'profilePage'])->name('admin.profilePage');
-    Route::put('update/profile/image/{id}',[AdminController::class,'saveImage'])->name('admin.saveImage');
-    Route::get('change/profile',[AdminController::class,'changeProfilePage'])->name('admin.changeProfilePage');
-    Route::put('update/profile/{id}',[AdminController::class,'changeProfile'])->name('admin.changeProfile');
+    Route::get('profile', [AdminController::class, 'profilePage'])->name('admin.profilePage');
+    Route::put('update/profile/image/{id}', [AdminController::class, 'saveImage'])->name('admin.saveImage');
+    Route::get('change/profile', [AdminController::class, 'changeProfilePage'])->name('admin.changeProfilePage');
+    Route::put('update/profile/{id}', [AdminController::class, 'changeProfile'])->name('admin.changeProfile');
 
     /*admin dashboard*/
     Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
 
     /*resource controller*/
-    Route::resource('systemadmin',SystemAdminController::class);
-    Route::resource('role',RoleController::class);
-    Route::resource('department',DepartmentController::class);
-    Route::resource('semester',SemesterController::class);
+    Route::resource('systemadmin', SystemAdminController::class);
+    Route::resource('role', RoleController::class);
+    Route::resource('department', DepartmentController::class);
+    Route::resource('semester', SemesterController::class);
 
     /*Ajax call*/
-    Route::get('/check/is_active/{id}',[SystemAdminController::class,'changeStatus'])->name('admin.changeStatus');
-    Route::get('/check/department/is_active/{id}',[DepartmentController::class,'changeStatus'])->name('admin.changeStatus');
-    Route::get('/check/semester/is_active/{id}',[SemesterController::class,'changeStatus'])->name('admin.changeStatus');
-
+    Route::get('/check/is_active/{id}', [SystemAdminController::class, 'changeStatus'])->name('admin.changeStatus');
+    Route::get('/check/department/is_active/{id}', [DepartmentController::class, 'changeStatus'])->name('admin.changeStatus');
+    Route::get('/check/semester/is_active/{id}', [SemesterController::class, 'changeStatus'])->name('admin.changeStatus');
 });
