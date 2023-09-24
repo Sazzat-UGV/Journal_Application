@@ -7,7 +7,9 @@ use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SemesterController;
 use App\Http\Controllers\Backend\SystemAdminController;
+use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +24,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('')->group(function () {
+    /*home page route */
     Route::get('/', [HomeController::class, 'homePage'])->name('homePage');
+
+    /*registration route*/
+    Route::get('registration', [AuthLoginController::class, 'registrationPage'])->name('home.registrationPage');
+    Route::post('registration', [AuthLoginController::class, 'registration'])->name('home.registration');
+
+    /*login route*/
+    Route::get('login', [AuthLoginController::class, 'loginPage'])->name('home.loginPage');
+    Route::post('login', [AuthLoginController::class, 'login'])->name('home.login');
+
+    /*user route*/
+    Route::get('logout', [AuthLoginController::class, 'logout'])->name('user.logout');
+    Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
 });
 
 

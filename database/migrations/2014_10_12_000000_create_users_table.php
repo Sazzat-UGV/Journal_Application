@@ -19,10 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('email')->unique();
-            // $table->string('designation')->nullable();
-            // $table->string('student_id')->nullable();
+            $table->string('student_id')->nullable();
             $table->string('phone')->nullable();
-            // $table->string('address')->nullable();
+            $table->string('address')->nullable();
             $table->string('image')->default('default_user.jpg');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

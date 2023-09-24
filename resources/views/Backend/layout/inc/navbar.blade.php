@@ -1,11 +1,14 @@
 <div class="header">
     <div class="header-left">
         <a href="{{ route('admin.dashboard') }}" class="logo">
-            <img src="{{ asset('assets/Backend') }}/img/logo.png" alt="Logo">
+            {{-- <img src="{{ asset('assets/Backend') }}/img/logo.png" alt="Logo">
+             --}}
+             <h3 class="text-center">UGV Journals</h3>
         </a>
         <a href="{{ route('admin.dashboard') }}" class="logo logo-small">
-            <img src="{{ asset('assets/Backend') }}/img/logo-small.png" alt="Logo" width="30" height="30">
-        </a>
+            {{-- <img src="{{ asset('assets/Backend') }}/img/logo-small.png" alt="Logo" width="30" height="30"> --}}
+
+            <h3 class="text-center">UGV Journals</h3></a>
     </div>
     <a href="javascript:void(0);" id="toggle_btn">
         <i class="fas fa-align-left"></i>

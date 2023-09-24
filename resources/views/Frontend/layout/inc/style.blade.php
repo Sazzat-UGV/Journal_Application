@@ -1,4 +1,4 @@
-<link rel="shortcut icon" href="{{ asset('assets/Frontend') }}/brand/logo.jpg" type="image/x-icon" />
+{{-- <link rel="shortcut icon" href="{{ asset('assets/Frontend') }}/brand/logo.jpg" type="image/x-icon" /> --}}
 <!-- Bootstrap core CSS -->
 <link href="{{ asset('assets/Frontend') }}/css/bootstrap.min.css" rel="stylesheet" />
 
