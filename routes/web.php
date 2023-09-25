@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\SemesterController;
 use App\Http\Controllers\Backend\SystemAdminController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ForgetPasswordController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,14 @@ Route::prefix('')->group(function () {
     /*login route*/
     Route::get('login', [AuthLoginController::class, 'loginPage'])->name('home.loginPage');
     Route::post('login', [AuthLoginController::class, 'login'])->name('home.login');
+
+    /*Forget Password */
+    Route::get('forget-password', [ForgetPasswordController::class, 'forgetPasswordPage'])->name('home.forgetPasswordPage');
+    Route::post('forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('home.forgetPassword');
+
+    /*Reset Password */
+    Route::get('reset-password/{token}', [ForgetPasswordController::class, 'resetPasswordPage'])->name('home.resetPasswordPage');
+    Route::post('reset-password/{token}', [ForgetPasswordController::class, 'resetPassword'])->name('home.resetPassword');
 
     /*user route*/
     Route::get('logout', [AuthLoginController::class, 'logout'])->name('user.logout');
