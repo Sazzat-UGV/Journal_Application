@@ -1,6 +1,6 @@
 @extends('Frontend.layout.master')
 @section('title')
-Home Page
+UGV Journals
 @endsection
 @push('user_style')
 

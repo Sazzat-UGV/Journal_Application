@@ -47,6 +47,15 @@ Route::prefix('')->group(function () {
     /*user route*/
     Route::get('logout', [AuthLoginController::class, 'logout'])->name('user.logout');
     Route::get('profile', [UserController::class, 'profile'])->name('user.profile');
+
+    /*edit profile route*/
+    Route::get('editProfilePage', [UserController::class, 'editProfilePage'])->name('user.editProfilePage');
+    Route::put('editProfile/{id}', [UserController::class, 'editProfile'])->name('user.editProfile');
+    Route::put('editProfileimage/{id}', [UserController::class, 'editProfileimage'])->name('user.editProfileimage');
+
+    /*change password route*/
+    Route::get('change-password',[UserController::class,'changePasswordPage'])->name('user.changePasswordPage');
+    Route::post('change-password',[UserController::class,'changePassword'])->name('user.changePassword');
 });
 
 

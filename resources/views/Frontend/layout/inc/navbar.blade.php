@@ -6,12 +6,49 @@
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0"></ul>
-            <div class="d-flex justify-content-end">
-                <a href="{{ route('home.registrationPage') }}" class="me-4 btn btn-outline-success rounded-0">Register</a>
-                <a href="{{ route('home.loginPage') }}" class="btn btn-success rounded-0">Sign in</a>
-            </div>
+        <div class="collapse navbar-collapse justify-content-end">
+            <!-- Use justify-content-end to align items to the right -->
+            <ul class="navbar-nav">
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ asset('uploads/user') }}/{{ Auth::user()->image }}" alt="Profile Image"
+                                class="rounded-circle" width="32" height="32">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="{{ route('user.profile') }}">My Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.changePasswordPage') }}">Change Password</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                @endauth
+                @guest
+                <li class="nav-item ">
+                    <a href="{{ route('home.registrationPage') }}" class="nav-link text-white btn btn-success rounded-3 px-4" style="margin-right:10px;">Register</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('home.loginPage') }}" class="ml-10 nav-link text-white btn btn-success rounded-3 px-4">Sign in</a>
+                </li>
+
+                @endguest
+            </ul>
         </div>
     </div>
 </nav>
