@@ -2,7 +2,7 @@
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
-                <li class="submenu active">
+                <li class=" active">
                     <a href="{{ route('admin.dashboard') }}"><i class="fas fa-user-graduate"></i> <span>
                             Dashboard</span></a>
                 </li>
@@ -59,7 +59,12 @@
                     </li>
                 @endcan
 
-
+                @can('index-user')
+                    <li class="">
+                        <a href="{{ route('admin.userManagementIndex') }}"><i class="fas fa-user-cog"></i> <span>
+                                User Managements</span></a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>

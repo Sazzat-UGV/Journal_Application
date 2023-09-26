@@ -20,6 +20,7 @@ class ModuleSeeder extends Seeder
             'System Role Settings',
             'Department Management',
             'Semester Management',
+            'User Managements',
         ];
 
         foreach ($module_array as $module) {

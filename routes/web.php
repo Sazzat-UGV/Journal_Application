@@ -7,6 +7,7 @@ use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SemesterController;
 use App\Http\Controllers\Backend\SystemAdminController;
+use App\Http\Controllers\Backend\UserManagementController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ForgetPasswordController;
@@ -54,8 +55,8 @@ Route::prefix('')->group(function () {
     Route::put('editProfileimage/{id}', [UserController::class, 'editProfileimage'])->name('user.editProfileimage');
 
     /*change password route*/
-    Route::get('change-password',[UserController::class,'changePasswordPage'])->name('user.changePasswordPage');
-    Route::post('change-password',[UserController::class,'changePassword'])->name('user.changePassword');
+    Route::get('change-password', [UserController::class, 'changePasswordPage'])->name('user.changePasswordPage');
+    Route::post('change-password', [UserController::class, 'changePassword'])->name('user.changePassword');
 });
 
 
@@ -92,4 +93,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/check/is_active/{id}', [SystemAdminController::class, 'changeStatus'])->name('admin.changeStatus');
     Route::get('/check/department/is_active/{id}', [DepartmentController::class, 'changeStatus'])->name('admin.changeStatus');
     Route::get('/check/semester/is_active/{id}', [SemesterController::class, 'changeStatus'])->name('admin.changeStatus');
+
+    /*User Management Route*/
+    Route::get('user', [UserManagementController::class, 'index'])->name('admin.userManagementIndex');
+    Route::get('user/view-details/{id}', [UserManagementController::class, 'view'])->name('admin.userManagementView');
+    Route::delete('user/delete/{id}', [UserManagementController::class, 'destroy'])->name('admin.userManagementDestroy');
 });

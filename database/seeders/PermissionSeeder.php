@@ -42,6 +42,13 @@ class PermissionSeeder extends Seeder
             'Edit Semester',
             'Delete Semester',
         ];
+        $adminuserManagementPermissionArray = [
+            'Index User',
+            'View User Profile',
+            'View User Publications',
+            'Edit User',
+            'Delete User',
+        ];
 
 
         //Access Dashboard
@@ -90,6 +97,16 @@ class PermissionSeeder extends Seeder
                 'module_id' => $adminSemesterModule->id,
                 'permission_name' => $adminSemesterPermissionArray[$i],
                 'permission_slug' => Str::slug($adminSemesterPermissionArray[$i]),
+            ]);
+        }
+
+        //user management
+        $adminUserManagemanetModule = Module::where('module_name', 'User Managements')->select('id')->first();
+        for ($i = 0; $i < count($adminuserManagementPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $adminUserManagemanetModule->id,
+                'permission_name' => $adminuserManagementPermissionArray[$i],
+                'permission_slug' => Str::slug($adminuserManagementPermissionArray[$i]),
             ]);
         }
     }
