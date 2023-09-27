@@ -1,77 +1,73 @@
 @extends('Backend.layout.master')
 @section('title')
-    Index Department
+    Index Category
 @endsection
 @push('admin_style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 @endpush
 @section('content')
     @include('Backend.layout.inc.breadcumb', [
-        'page_name' => 'Index Department',
-        'main_page_name' => 'Departments',
-        'sub_page_name' => 'Index Department',
-        'main_page_url' => route('department.index'),
+        'page_name' => 'Index Category',
+        'main_page_name' => 'Categories',
+        'sub_page_name' => 'Index Category',
+        'main_page_url' => route('category.index'),
     ])
 
     <div class="card-body">
         <div class="row">
-            @can('create-department')
+            @can('create-category')
                 <div class="col-md-12 col-lg-12 col-sm-12 pb-3">
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('department.create') }}" class="btn btn-primary me-4"><i class="fas fa-plus-circle"></i>
+                        <a href="{{ route('category.create') }}" class="btn btn-primary me-4"><i class="fas fa-plus-circle"></i>
                             Add New
-                            Department</a>
+                            Category</a>
                     </div>
                 </div>
             @endcan
             <div class="table-responsive text-nowrap my-3">
-                <table id="example" class="table table-striped" style="width:100%">
+                <table class="table table-hover" id="example">
                     <thead>
                         <tr class=" text-center">
                             <th>#</th>
-                            <th>Last Updated</th>
-                            <th>Name</th>
-                            <th>Full Name</th>
-                            @can('edit-department')
+                            <th>Created at</th>
+                            <th>Category Name</th>
+                            @can('edit-category')
                                 <th>Status</th>
                             @endcan
-                            @if (Auth::user()->haspermission('edit-department') || Auth::user()->haspermission('delete-department'))
+                            @if (Auth::user()->haspermission('edit-category') || Auth::user()->haspermission('delete-category'))
                                 <th>Actions</th>
                             @endif
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @forelse ($departments as $index=>$department)
+                        @forelse ($categories as $index=>$category)
                             <tr>
                                 <td><strong>{{ $index + 1 }}</strong></td>
-                                <td>{{ $department->updated_at->format('d-M-Y') }}</td>
-                                <td>{{ $department->name }}</td>
-                                <td>{{ Str::limit($department->full_name, 30, '...') }}</td>
-                                @can('edit-department')
+                                <td>{{ $category->created_at->format('d-M-Y') }}</td>
+                                <td>{{ $category->category_name }}</td>
+                                @can('edit-category')
                                     <td>
                                         <div class="custom-control custom-switch">
                                             <input class="custom-control-input toggle-class" type="checkbox"
-                                                data-id="{{ $department->id }}" id="department-{{ $department->id }}"
-                                                {{ $department->is_active ? 'checked' : '' }}>
-                                            <label class="custom-control-label" for="department-{{ $department->id }}"></label>
+                                                data-id="{{ $category->id }}" id="category-{{ $category->id }}"
+                                                {{ $category->is_active ? 'checked' : '' }}>
+                                            <label class="custom-control-label" for="category-{{ $category->id }}"></label>
                                         </div>
-                                    </td>
                                 @endcan
-                                @if (Auth::user()->haspermission('edit-department') || Auth::user()->haspermission('delete-department'))
+
+                                @if (Auth::user()->haspermission('edit-category') || Auth::user()->haspermission('delete-category'))
                                 <td class="text-right">
                                     <div class="actions d-flex justify-content-start">
-                                        @can('edit-department')
+                                @can('edit-category')
                                         <div class="actions">
-                                            <a href="{{ route('department.edit', $department->id) }}"
+                                            <a href="{{ route('category.edit', $category->id) }}"
                                                 class="btn btn-sm bg-success-light mr-1">
                                                 <i class="fas fa-pen"></i>
                                             </a>
                                         </div>
-                                        @endcan
-
-
-                                        @can('delete-department')
-                                        <form action="{{ route('department.destroy', $department->id) }}" method="POST">
+                                @endcan
+                                @can('delete-category')
+                                        <form action="{{ route('category.destroy', $category->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class=" btn btn-sm bg-danger-light show_confirm">
@@ -81,7 +77,7 @@
                                         @endcan
                                     </div>
                                     </td>
-                                @endif
+                                    @endif
                             </tr>
                         @endforeach
                     </tbody>
@@ -111,7 +107,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: '/admin/check/department/is_active/' + item_id,
+                    url: '/admin/check/category/is_active/' + item_id,
                     success: function(response) {
                         console.log(response);
                         Swal.fire(

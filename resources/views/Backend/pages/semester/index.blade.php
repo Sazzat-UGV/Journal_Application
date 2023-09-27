@@ -25,7 +25,7 @@
                 </div>
             @endcan
             <div class="table-responsive text-nowrap my-3">
-                <table class="table table-hover">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class=" text-center">
                             <th>#</th>
@@ -55,18 +55,18 @@
                                         </div>
                                     </td>
                                 @endcan
+                                @if (Auth::user()->haspermission('edit-semester') || Auth::user()->haspermission('delete-semester'))
+                                <td class="text-right">
+                                    <div class="actions d-flex justify-content-start">
                                 @can('edit-semester')
-                                    <td class="text-right">
                                         <div class="actions">
                                             <a href="{{ route('semester.edit', $semester->slug) }}"
                                                 class="btn btn-sm bg-success-light mr-1">
                                                 <i class="fas fa-pen"></i>
                                             </a>
                                         </div>
-                                    </td>
                                 @endcan
                                 @can('delete-semester')
-                                    <td>
                                         <form action="{{ route('semester.destroy', $semester->slug) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -74,8 +74,10 @@
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
+                                        @endcan
+                                    </div>
                                     </td>
-                                @endcan
+                                    @endif
                             </tr>
                         @endforeach
                     </tbody>

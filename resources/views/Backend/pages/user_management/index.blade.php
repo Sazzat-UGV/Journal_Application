@@ -55,7 +55,7 @@
                                 @endcan
                                 @if (Auth::user()->haspermission('view-user-profile') || Auth::user()->haspermission('delete-user'))
                                     <td class="text-right">
-                                        <div class="actions d-flex justify-content-end">
+                                        <div class="actions d-flex justify-content-start">
                                             @can('view-user-profile')
                                                 <a href="{{ route('admin.userManagementView', ['id' => $user->id]) }}"
                                                     class="btn btn-sm bg-secondary-light border-dark mr-1">

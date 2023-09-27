@@ -78,6 +78,18 @@
                     </li>
                 @endcan
 
+                @can('index-category')
+                    <li class="submenu">
+                        <a href="#"><i class="fas fa-list-alt"></i> <span> Categories</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="{{ route('category.index') }}">Category List</a></li>
+                            @can('create-category')
+                                <li><a href="{{ route('category.create') }}">Add New Category</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
 
             </ul>
         </div>

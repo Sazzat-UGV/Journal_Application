@@ -52,6 +52,12 @@ class PermissionSeeder extends Seeder
         $adminSystemSettingsPermissionArray = [
             'Mail Setting',
         ];
+        $adminCategoryManagementPermissionArray = [
+            'Index Category',
+            'Create Category',
+            'Edit Category',
+            'Delete Category',
+        ];
 
 
         //Access Dashboard
@@ -112,6 +118,7 @@ class PermissionSeeder extends Seeder
                 'permission_slug' => Str::slug($adminuserManagementPermissionArray[$i]),
             ]);
         }
+
         //system setting
         $adminSystemSettingModule = Module::where('module_name', 'System Settings')->select('id')->first();
         for ($i = 0; $i < count($adminSystemSettingsPermissionArray); $i++) {
@@ -119,6 +126,16 @@ class PermissionSeeder extends Seeder
                 'module_id' => $adminSystemSettingModule->id,
                 'permission_name' => $adminSystemSettingsPermissionArray[$i],
                 'permission_slug' => Str::slug($adminSystemSettingsPermissionArray[$i]),
+            ]);
+        }
+
+        //category management
+        $adminCategoryManagementModule = Module::where('module_name', 'Category Management')->select('id')->first();
+        for ($i = 0; $i < count($adminCategoryManagementPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $adminCategoryManagementModule->id,
+                'permission_name' => $adminCategoryManagementPermissionArray[$i],
+                'permission_slug' => Str::slug($adminCategoryManagementPermissionArray[$i]),
             ]);
         }
     }

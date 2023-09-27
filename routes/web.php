@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\SemesterController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SystemAdminController;
 use App\Http\Controllers\Backend\UserManagementController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ForgetPasswordController;
@@ -89,11 +90,13 @@ Route::prefix('admin')->group(function () {
     Route::resource('role', RoleController::class);
     Route::resource('department', DepartmentController::class);
     Route::resource('semester', SemesterController::class);
+    Route::resource('category',CategoryController::class);
 
     /*Ajax call*/
     Route::get('/check/is_active/{id}', [SystemAdminController::class, 'changeStatus'])->name('admin.changeStatus');
     Route::get('/check/department/is_active/{id}', [DepartmentController::class, 'changeStatus'])->name('admin.changeStatus');
     Route::get('/check/semester/is_active/{id}', [SemesterController::class, 'changeStatus'])->name('admin.changeStatus');
+    Route::get('/check/category/is_active/{id}', [CategoryController::class, 'changeStatus'])->name('admin.changeStatus');
 
     /*User Management Route*/
     Route::get('user', [UserManagementController::class, 'index'])->name('admin.userManagementIndex');

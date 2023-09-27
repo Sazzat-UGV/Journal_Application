@@ -70,7 +70,7 @@
                                 Auth::user()->haspermission('delete-admin'))
 
                                 <td class="text-right">
-                                    <div class="actions d-flex justify-content-end">
+                                    <div class="actions d-flex justify-content-start">
                                         @can('edit-admin')
                                         <a href="{{ route('systemadmin.edit', $admin->id) }}"
                                             class="btn btn-sm bg-success-light mr-1">

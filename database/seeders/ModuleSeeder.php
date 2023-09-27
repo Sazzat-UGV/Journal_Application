@@ -21,7 +21,8 @@ class ModuleSeeder extends Seeder
             'Department Management',
             'Semester Management',
             'User Managements',
-            'System Settings'
+            'System Settings',
+            'Category Management'
         ];
 
         foreach ($module_array as $module) {

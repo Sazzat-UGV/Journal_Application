@@ -25,7 +25,7 @@
             </div>
             @endcan
             <div class="table-responsive text-nowrap my-3">
-                <table class="table table-hover">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr class=" text-center">
                             <th>#</th>
