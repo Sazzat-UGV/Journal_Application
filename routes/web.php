@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SemesterController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SystemAdminController;
 use App\Http\Controllers\Backend\UserManagementController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
@@ -98,4 +99,9 @@ Route::prefix('admin')->group(function () {
     Route::get('user', [UserManagementController::class, 'index'])->name('admin.userManagementIndex');
     Route::get('user/view-details/{id}', [UserManagementController::class, 'view'])->name('admin.userManagementView');
     Route::delete('user/delete/{id}', [UserManagementController::class, 'destroy'])->name('admin.userManagementDestroy');
+
+    /*System setting route*/
+    Route::get('mail-setting',[SettingController::class,'mailSettingPage'])->name('admin.mailSettingPage');
+    Route::post('mail-setting',[SettingController::class,'mailSetting'])->name('admin.mailSetting');
+
 });

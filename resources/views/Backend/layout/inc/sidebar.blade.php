@@ -65,6 +65,20 @@
                                 User Managements</span></a>
                     </li>
                 @endcan
+
+                @can('mail-setting')
+                    <li class="submenu">
+                        <a href="#"><i class="fas fa-cog"></i> <span> System Settings</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul>
+                            @can('mail-setting')
+                                <li><a href="{{ route('admin.mailSettingPage') }}">Mail Setting</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
+
             </ul>
         </div>
     </div>

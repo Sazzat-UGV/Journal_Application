@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        browner12\helpers\HelperServiceProvider::class,
     ])->toArray(),
 
     /*

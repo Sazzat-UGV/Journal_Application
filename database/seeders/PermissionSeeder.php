@@ -49,6 +49,9 @@ class PermissionSeeder extends Seeder
             'Edit User',
             'Delete User',
         ];
+        $adminSystemSettingsPermissionArray = [
+            'Mail Setting',
+        ];
 
 
         //Access Dashboard
@@ -107,6 +110,15 @@ class PermissionSeeder extends Seeder
                 'module_id' => $adminUserManagemanetModule->id,
                 'permission_name' => $adminuserManagementPermissionArray[$i],
                 'permission_slug' => Str::slug($adminuserManagementPermissionArray[$i]),
+            ]);
+        }
+        //system setting
+        $adminSystemSettingModule = Module::where('module_name', 'System Settings')->select('id')->first();
+        for ($i = 0; $i < count($adminSystemSettingsPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $adminSystemSettingModule->id,
+                'permission_name' => $adminSystemSettingsPermissionArray[$i],
+                'permission_slug' => Str::slug($adminSystemSettingsPermissionArray[$i]),
             ]);
         }
     }
