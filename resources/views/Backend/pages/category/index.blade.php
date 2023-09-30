@@ -31,9 +31,6 @@
                             <th>#</th>
                             <th>Created at</th>
                             <th>Category Name</th>
-                            @can('edit-category')
-                                <th>Status</th>
-                            @endcan
                             @if (Auth::user()->haspermission('edit-category') || Auth::user()->haspermission('delete-category'))
                                 <th>Actions</th>
                             @endif
@@ -45,39 +42,30 @@
                                 <td><strong>{{ $index + 1 }}</strong></td>
                                 <td>{{ $category->created_at->format('d-M-Y') }}</td>
                                 <td>{{ $category->category_name }}</td>
-                                @can('edit-category')
-                                    <td>
-                                        <div class="custom-control custom-switch">
-                                            <input class="custom-control-input toggle-class" type="checkbox"
-                                                data-id="{{ $category->id }}" id="category-{{ $category->id }}"
-                                                {{ $category->is_active ? 'checked' : '' }}>
-                                            <label class="custom-control-label" for="category-{{ $category->id }}"></label>
-                                        </div>
-                                @endcan
 
                                 @if (Auth::user()->haspermission('edit-category') || Auth::user()->haspermission('delete-category'))
-                                <td class="text-right">
-                                    <div class="actions d-flex justify-content-start">
-                                @can('edit-category')
-                                        <div class="actions">
-                                            <a href="{{ route('category.edit', $category->id) }}"
-                                                class="btn btn-sm bg-success-light mr-1">
-                                                <i class="fas fa-pen"></i>
-                                            </a>
+                                    <td class="text-right">
+                                        <div class="actions d-flex justify-content-start">
+                                            @can('edit-category')
+                                                <div class="actions">
+                                                    <a href="{{ route('category.edit', $category->id) }}"
+                                                        class="btn btn-sm bg-success-light mr-1">
+                                                        <i class="fas fa-pen"></i>
+                                                    </a>
+                                                </div>
+                                            @endcan
+                                            @can('delete-category')
+                                                <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class=" btn btn-sm bg-danger-light show_confirm">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </div>
-                                @endcan
-                                @can('delete-category')
-                                        <form action="{{ route('category.destroy', $category->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class=" btn btn-sm bg-danger-light show_confirm">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                        @endcan
-                                    </div>
                                     </td>
-                                    @endif
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
@@ -98,32 +86,6 @@
             $('#example').DataTable({
                 pagingType: 'first_last_numbers',
             });
-
-
-            $('.toggle-class').change(function() {
-                var is_active = $(this).prop('checked') == true ? 1 : 0;
-                var item_id = $(this).data('id');
-
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: '/admin/check/category/is_active/' + item_id,
-                    success: function(response) {
-                        console.log(response);
-                        Swal.fire(
-                            'Status Updated!',
-                            'Click ok button!',
-                            'success'
-                        )
-                    },
-                    errro: function(err) {
-                        if (err) {
-                            console.log(err);
-                        }
-                    }
-                });
-            });
-
 
             $('.show_confirm').click(function(event) {
                 let form = $(this).closest('form');

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Paper;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Response;
 
 class UserManagementController extends Controller
 {
@@ -22,7 +24,8 @@ class UserManagementController extends Controller
     {
         Gate::authorize('view-user-profile');
         $user = User::with('semester:id,semester_name', 'department:id,full_name')->where('id', $id)->first();
-        return view('Backend.pages.user_management.view', compact('user'));
+        $papers = Paper::with('category:id,category_name', 'user:id,student_id')->where('user_id', $id)->select('id', 'paper_title', 'category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id')->latest('id')->get();
+        return view('Backend.pages.user_management.view', compact('user', 'papers'));
     }
 
 
@@ -33,5 +36,18 @@ class UserManagementController extends Controller
         $user->delete();
         Toastr::success('User deleted successfully');
         return back();
+    }
+
+    public function showPDF($user_id, $filename)
+    {
+        Gate::authorize('view-user-publications');
+        $student_id = User::where('id', $user_id)->pluck('student_id')->first();
+        $filePath = public_path('uploads/student_document/' . $student_id . '/' . $filename);
+
+        if (file_exists($filePath)) {
+            return Response::file($filePath, ['Content-Type' => 'application/pdf']);
+        } else {
+            abort(404); // File not found
+        }
     }
 }

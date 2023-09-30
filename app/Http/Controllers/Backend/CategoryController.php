@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         Gate::authorize('index-category');
-        $categories=Category::select('id','category_name','category_slug','is_active','created_at')->latest('id')->get();
+        $categories=Category::select('id','category_name','category_slug','created_at')->latest('id')->get();
         return view('Backend.pages.category.index',compact('categories'));
     }
 
@@ -92,19 +92,4 @@ class CategoryController extends Controller
         return redirect()->route('category.index');
     }
 
-
-    public function changeStatus(string $id)
-    {
-        $category = Category::find($id);
-        if ($category->is_active == 1) {
-            $category->is_active = 0;
-        } else {
-            $category->is_active = 1;
-        }
-        $category->update();
-        return response()->json([
-            'type' => 'success',
-            'message' => 'Status Updated',
-        ]);
-    }
 }

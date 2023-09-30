@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ForgetPasswordController;
+use App\Http\Controllers\Frontend\PublicationController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,11 @@ Route::prefix('')->group(function () {
     /*change password route*/
     Route::get('change-password', [UserController::class, 'changePasswordPage'])->name('user.changePasswordPage');
     Route::post('change-password', [UserController::class, 'changePassword'])->name('user.changePassword');
+
+    /*Publication route*/
+    Route::get('publicaton-create',[PublicationController::class,'create'])->name('user.PublicationCreate');
+    Route::post('publicaton-create',[PublicationController::class,'store'])->name('user.PublicationStore');
+    Route::get('publicaton-index',[PublicationController::class,'index'])->name('user.PublicationIndex');
 });
 
 
@@ -96,11 +102,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/check/is_active/{id}', [SystemAdminController::class, 'changeStatus'])->name('admin.changeStatus');
     Route::get('/check/department/is_active/{id}', [DepartmentController::class, 'changeStatus'])->name('admin.changeStatus');
     Route::get('/check/semester/is_active/{id}', [SemesterController::class, 'changeStatus'])->name('admin.changeStatus');
-    Route::get('/check/category/is_active/{id}', [CategoryController::class, 'changeStatus'])->name('admin.changeStatus');
+
 
     /*User Management Route*/
     Route::get('user', [UserManagementController::class, 'index'])->name('admin.userManagementIndex');
     Route::get('user/view-details/{id}', [UserManagementController::class, 'view'])->name('admin.userManagementView');
+    Route::get('user/view-pdf/{user_id}/{filename}', [UserManagementController::class, 'showPDF'])->name('admin.userManagementshowPDF');
     Route::delete('user/delete/{id}', [UserManagementController::class, 'destroy'])->name('admin.userManagementDestroy');
 
     /*System setting route*/
