@@ -7,27 +7,14 @@
                             Dashboard</span></a>
                 </li>
 
-                @can('index-admin')
+                @can('index-category')
                     <li class="submenu">
-                        <a href="#"><i class="fas fa-user-alt"></i> <span> System Admin Settings</span> <span
+                        <a href="#"><i class="fas fa-list-alt"></i> <span> Categories</span> <span
                                 class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="{{ route('systemadmin.index') }}">Admin List</a></li>
-                            @can('create-admin')
-                                <li><a href="{{ route('systemadmin.create') }}">Add New Admin</a></li>
-                            @endcan
-                        </ul>
-                    </li>
-                @endcan
-
-                @can('index-role')
-                    <li class="submenu">
-                        <a href="#"><i class="fas fa-user-edit"></i> <span> System Role Settings</span> <span
-                                class="menu-arrow"></span></a>
-                        <ul>
-                            <li><a href="{{ route('role.index') }}">Role List</a></li>
-                            @can('create-role')
-                                <li><a href="{{ route('role.create') }}">Add New Role</a></li>
+                            <li><a href="{{ route('category.index') }}">Category List</a></li>
+                            @can('create-category')
+                                <li><a href="{{ route('category.create') }}">Add New Category</a></li>
                             @endcan
                         </ul>
                     </li>
@@ -59,12 +46,41 @@
                     </li>
                 @endcan
 
+
                 @can('index-user')
                     <li class="">
                         <a href="{{ route('admin.userManagementIndex') }}"><i class="fas fa-user-cog"></i> <span>
                                 User Managements</span></a>
                     </li>
                 @endcan
+
+                @can('index-role')
+                    <li class="submenu">
+                        <a href="#"><i class="fas fa-user-edit"></i> <span> System Role Settings</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="{{ route('role.index') }}">Role List</a></li>
+                            @can('create-role')
+                                <li><a href="{{ route('role.create') }}">Add New Role</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
+
+                @can('index-admin')
+                    <li class="submenu">
+                        <a href="#"><i class="fas fa-user-alt"></i> <span> System Admin Settings</span> <span
+                                class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="{{ route('systemadmin.index') }}">Admin List</a></li>
+                            @can('create-admin')
+                                <li><a href="{{ route('systemadmin.create') }}">Add New Admin</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+
 
                 @can('mail-setting')
                     <li class="submenu">
@@ -78,18 +94,7 @@
                     </li>
                 @endcan
 
-                @can('index-category')
-                    <li class="submenu">
-                        <a href="#"><i class="fas fa-list-alt"></i> <span> Categories</span> <span
-                                class="menu-arrow"></span></a>
-                        <ul>
-                            <li><a href="{{ route('category.index') }}">Category List</a></li>
-                            @can('create-category')
-                                <li><a href="{{ route('category.create') }}">Add New Category</a></li>
-                            @endcan
-                        </ul>
-                    </li>
-                @endcan
+
 
             </ul>
         </div>

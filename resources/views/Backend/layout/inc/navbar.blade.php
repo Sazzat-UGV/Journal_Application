@@ -8,7 +8,7 @@
         <a href="{{ route('admin.dashboard') }}" class="logo logo-small">
             {{-- <img src="{{ asset('assets/Backend') }}/img/logo-small.png" alt="Logo" width="30" height="30"> --}}
 
-            <h3 class="text-center">UGV Journals</h3></a>
+            <h3 class="text-center">UGV</h3></a>
     </div>
     <a href="javascript:void(0);" id="toggle_btn">
         <i class="fas fa-align-left"></i>

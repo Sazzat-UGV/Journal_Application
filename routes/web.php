@@ -65,6 +65,7 @@ Route::prefix('')->group(function () {
     Route::get('publicaton-create',[PublicationController::class,'create'])->name('user.PublicationCreate');
     Route::post('publicaton-create',[PublicationController::class,'store'])->name('user.PublicationStore');
     Route::get('publicaton-index',[PublicationController::class,'index'])->name('user.PublicationIndex');
+    Route::get('user/view-pdf/{user_id}/{filename}', [PublicationController::class, 'showPDF'])->name('user.userManagementshowPDF');
 });
 
 
