@@ -22,7 +22,8 @@ class ModuleSeeder extends Seeder
             'Semester Management',
             'User Managements',
             'System Settings',
-            'Category Management'
+            'Category Management',
+            'System Backup',
         ];
 
         foreach ($module_array as $module) {

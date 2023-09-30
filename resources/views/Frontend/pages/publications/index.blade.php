@@ -8,9 +8,15 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        .modal-body {
-            word-wrap: break-word;
-        }
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 80vh;
+    overflow-x: auto;
+}
     </style>
 @endpush
 @section('content')
@@ -48,21 +54,26 @@
                                 <!-- Modal -->
                                 <div class="modal fade" id="myModal-{{ $paper->id }}" tabindex="-1" role="dialog"
                                     aria-labelledby="myModal-{{ $paper->id }}Label" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+                                        role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="myModal-{{ $paper->id }}Label">Paper Details</h5>
+                                                <h5 class="modal-title text-wrap" id="myModal-{{ $paper->id }}Label">Paper Details</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p><span class="text-info">Title: </span>{{ $paper->paper_title }}</p>
-                                                <p><span class="text-info">Paper Area: </span>{{ $paper->category->category_name }}</p>
-                                                <p><span class="text-info">Email: </span>{{ $paper->email }}</p>
-                                                <p><span class="text-info">Authors: </span>{{ $paper->author }}</p>
-                                                <p><span class="text-info">Abstract: </span>{{ $paper->abstract }}</p>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <p><span class="text-info">Title: </span>{{ $paper->paper_title }}</p>
+                                                        <p><span class="text-info">Paper Area: </span>{{ $paper->category->category_name }}</p>
+                                                        <p><span class="text-info">Email: </span>{{ $paper->email }}</p>
+                                                        <p><span class="text-info">Authors: </span>{{ $paper->author }}</p>
+                                                        <p><span class="text-info">Abstract: </span>{{ $paper->abstract }}</p>
+                                                    </div>
+                                                </div>
                                                 <a href="{{ route('user.userManagementshowPDF', ['user_id' => $paper->user_id, 'filename' => $paper->file]) }}"
                                                     class="btn btn-sm bg-secondary-light border-dark mr-1"
                                                     target="_blank">

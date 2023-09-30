@@ -58,7 +58,12 @@ class PermissionSeeder extends Seeder
             'Edit Category',
             'Delete Category',
         ];
-
+        $adminBackupManagementPermissionArray = [
+            'Index Backup',
+            'Create Backup',
+            'Delete Backup',
+            'Download Backup',
+        ];
 
         //Access Dashboard
         $adminDashboardModule = Module::where('module_name', 'Admin Dashboard')->select('id')->first();
@@ -136,6 +141,15 @@ class PermissionSeeder extends Seeder
                 'module_id' => $adminCategoryManagementModule->id,
                 'permission_name' => $adminCategoryManagementPermissionArray[$i],
                 'permission_slug' => Str::slug($adminCategoryManagementPermissionArray[$i]),
+            ]);
+        }
+        //backup management
+        $adminBackupManagementModule = Module::where('module_name', 'System Backup')->select('id')->first();
+        for ($i = 0; $i < count($adminBackupManagementPermissionArray); $i++) {
+            Permission::updateOrCreate([
+                'module_id' => $adminBackupManagementModule->id,
+                'permission_name' => $adminBackupManagementPermissionArray[$i],
+                'permission_slug' => Str::slug($adminBackupManagementPermissionArray[$i]),
             ]);
         }
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Auth\LoginController;
+use App\Http\Controllers\Backend\BackupController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\Backend\RoleController;
@@ -98,6 +99,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('department', DepartmentController::class);
     Route::resource('semester', SemesterController::class);
     Route::resource('category',CategoryController::class);
+    Route::resource('backup', BackupController::class)->only(['index', 'store', 'destroy']);
 
     /*Ajax call*/
     Route::get('/check/is_active/{id}', [SystemAdminController::class, 'changeStatus'])->name('admin.changeStatus');
@@ -114,5 +116,8 @@ Route::prefix('admin')->group(function () {
     /*System setting route*/
     Route::get('mail-setting',[SettingController::class,'mailSettingPage'])->name('admin.mailSettingPage');
     Route::post('mail-setting',[SettingController::class,'mailSetting'])->name('admin.mailSetting');
+
+     /*System backup route*/
+    Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('admin.backupDownload');
 
 });

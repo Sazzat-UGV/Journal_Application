@@ -95,6 +95,14 @@
                 @endcan
 
 
+                @can('index-backup')
+                    <li class="">
+                        <a href="{{ route('backup.index') }}"><i class="fas fa-database"></i> <span>
+                                System Backup</span></a>
+                    </li>
+                @endcan
+
+
 
             </ul>
         </div>
