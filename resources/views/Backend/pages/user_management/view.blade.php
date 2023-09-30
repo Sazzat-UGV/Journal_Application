@@ -42,9 +42,9 @@
                         <a class="nav-link active" data-toggle="tab" href="#per_details_tab">About</a>
                     </li>
                     @can('view-user-publications')
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#publications">Publications</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#publications">Publications</a>
+                        </li>
                     @endcan
                 </ul>
             </div>
@@ -112,74 +112,92 @@
                 </div>
 
                 @can('view-user-publications')
-                <div id="publications" class="tab-pane fade">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Publications</h5>
-                            <div class="row">
-                                <div class="col-md-10 col-lg-12">
-                                    <table id="example" class="table table-striped" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Publish Date</th>
-                                                <th>Paper Title</th>
-                                                <th>Paper Area</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($papers as $index => $paper)
+                    <div id="publications" class="tab-pane fade">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Publications</h5>
+                                <div class="row">
+                                    <div class="col-md-10 col-lg-12">
+                                        <table id="example" class="table table-striped" style="width:100%">
+                                            <thead>
                                                 <tr>
-                                                    <th scope="row">{{ $index + 1 }}</th>
-                                                    <td>{{ $paper->created_at->format('d-M-Y') }}</td>
-                                                    <td>{{ $paper->paper_title }}</td>
-                                                    <td>{{ $paper->category->category_name }}</td>
-                                                    <td >
-                                                        <div class="actions">
-                                                            <a href="#" class="btn btn-sm bg-secondary-light border-dark mr-1" data-toggle="modal" data-target="#myModal-{{ $paper->id }}">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
-                                                        </div>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="myModal-{{ $paper->id }}" tabindex="-1" role="dialog" aria-labelledby="myModal-{{ $paper->id }}Label" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="myModal-{{ $paper->id }}Label">Paper Details</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="col-12">
-                                                                            <p><span class="text-info">Title: </span>{{ $paper->paper_title }}</p>
-                                                                            <p><span class="text-info">Paper Area: </span>{{ $paper->category->category_name }}</p>
-                                                                            <p><span class="text-info">Email: </span>{{ $paper->email }}</p>
-                                                                            <p><span class="text-info">Authors: </span>{{ $paper->author }}</p>
-                                                                            <p><span class="text-info">Abstract: </span>{{ $paper->abstract }}</p>
-                                                                            <a href="{{ route('admin.userManagementshowPDF', ['user_id'=>$paper->user_id,'filename' => $paper->file]) }}" class="btn btn-sm bg-secondary-light border-dark mr-1" target="_blank">
-                                                                                Download
-                                                                            </a>
+                                                    <th>#</th>
+                                                    <th>Publish Date</th>
+                                                    <th>Paper Title</th>
+                                                    <th>Paper Area</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($papers as $index => $paper)
+                                                    <tr>
+                                                        <th scope="row">{{ $index + 1 }}</th>
+                                                        <td>{{ $paper->created_at->format('d-M-Y') }}</td>
+                                                        <td>{{ $paper->paper_title }}</td>
+                                                        <td>{{ $paper->category->category_name }}</td>
+                                                        <td>
+                                                            <div class="actions">
+                                                                <a href="#"
+                                                                    class="btn btn-sm bg-secondary-light border-dark mr-1"
+                                                                    data-toggle="modal"
+                                                                    data-target="#myModal-{{ $paper->id }}">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            </div>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="myModal-{{ $paper->id }}"
+                                                                tabindex="-1" role="dialog"
+                                                                aria-labelledby="myModal-{{ $paper->id }}Label"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="myModal-{{ $paper->id }}Label">Paper
+                                                                                Details</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <div class="modal-body">
+                                                                            <div class="col-12">
+                                                                                <p><span class="text-info">Title:
+                                                                                    </span>{{ $paper->paper_title }}</p>
+                                                                                <p><span class="text-info">Paper Area:
+                                                                                    </span>{{ $paper->category->category_name }}
+                                                                                </p>
+                                                                                <p><span class="text-info">Email:
+                                                                                    </span>{{ $paper->email }}</p>
+                                                                                <p><span class="text-info">Authors:
+                                                                                    </span>{{ $paper->author }}</p>
+                                                                                <p><span class="text-info">Abstract:
+                                                                                    </span>{{ $paper->abstract }}</p>
+                                                                                <a href="{{ route('admin.userManagementshowPDF', ['user_id' => $paper->user_id, 'filename' => $paper->file]) }}"
+                                                                                    class="btn btn-sm bg-secondary-light border-dark mr-1"
+                                                                                    target="_blank">
+                                                                                    Download
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary"
+                                                                                data-dismiss="modal">Close</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                         </td>
-                                                        </tr>
-                                                        @endforeach
-                                                        </tbody>
-                                                        </table>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endcan
             @endsection
 

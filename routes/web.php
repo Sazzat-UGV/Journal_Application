@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SystemAdminController;
 use App\Http\Controllers\Backend\UserManagementController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\PublicationController as BackendPublicationController;
 use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ForgetPasswordController;
@@ -100,6 +101,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('semester', SemesterController::class);
     Route::resource('category',CategoryController::class);
     Route::resource('backup', BackupController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('publication', BackendPublicationController::class);
 
     /*Ajax call*/
     Route::get('/check/is_active/{id}', [SystemAdminController::class, 'changeStatus'])->name('admin.changeStatus');
@@ -111,6 +113,7 @@ Route::prefix('admin')->group(function () {
     Route::get('user', [UserManagementController::class, 'index'])->name('admin.userManagementIndex');
     Route::get('user/view-details/{id}', [UserManagementController::class, 'view'])->name('admin.userManagementView');
     Route::get('user/view-pdf/{user_id}/{filename}', [UserManagementController::class, 'showPDF'])->name('admin.userManagementshowPDF');
+    Route::get('user/publication/view-pdf/{user_id}/{filename}', [BackendPublicationController::class, 'showPDF'])->name('admin.usershowPDF');
     Route::delete('user/delete/{id}', [UserManagementController::class, 'destroy'])->name('admin.userManagementDestroy');
 
     /*System setting route*/

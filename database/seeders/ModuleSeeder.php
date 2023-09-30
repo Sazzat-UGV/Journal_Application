@@ -24,6 +24,7 @@ class ModuleSeeder extends Seeder
             'System Settings',
             'Category Management',
             'System Backup',
+            'Publications',
         ];
 
         foreach ($module_array as $module) {

@@ -46,6 +46,12 @@
                     </li>
                 @endcan
 
+                @can('index-publication')
+                    <li class="">
+                        <a href="{{ route('publication.index') }}"><i class="fas fa-book-open"></i> <span>
+                                Publications</span></a>
+                    </li>
+                @endcan
 
                 @can('index-user')
                     <li class="">

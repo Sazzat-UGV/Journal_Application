@@ -12,75 +12,77 @@
         'main_page_name' => 'User Managements',
         'main_page_url' => route('admin.userManagementIndex'),
     ])
-
-    <div class="card-body">
-        <div class="row">
-            <div class="table-responsive text-nowrap my-3">
-                <table id="example" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Created at</th>
-                            <th>Image</th>
-                            <th>User Name</th>
-                            <th>Student ID</th>
-                            <th>Department</th>
-                            @can('edit-user')
-                                <th>Status</th>
-                            @endcan
-                            @if (Auth::user()->haspermission('view-user-profile') || Auth::user()->haspermission('delete-user'))
-                                <th>Actions</th>
-                            @endif
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $index => $user)
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="table-responsive text-nowrap my-3">
+                    <table id="example" class="table table-striped" style="width:100%">
+                        <thead>
                             <tr>
-                                <th scope="row">{{ $index + 1 }}</th>
-                                <td>{{ $user->created_at->format('d-M-Y') }}</td>
-                                <td><img src="{{ asset('uploads/user') }}/{{ $user->image }}" alt="user image"
-                                        class="w-25 rounded-circle"></td>
-                                <td>{{ Str::limit($user->name, 20, '...') }}</td>
-                                <td>{{ $user->student_id }}</td>
-                                <td>{{ Str::limit($user->department->name, 10, '...') }}</td>
+                                <th>#</th>
+                                <th>Created at</th>
+                                <th>Image</th>
+                                <th>User Name</th>
+                                <th>Student ID</th>
+                                <th>Department</th>
                                 @can('edit-user')
-                                    <td>
-                                        <div class="custom-control custom-switch">
-                                            <input class="custom-control-input toggle-class" type="checkbox"
-                                                data-id="{{ $user->id }}" id="user-{{ $user->id }}"
-                                                {{ $user->is_active ? 'checked' : '' }}>
-                                            <label class="custom-control-label" for="user-{{ $user->id }}"></label>
-                                        </div>
-                                    </td>
+                                    <th>Status</th>
                                 @endcan
                                 @if (Auth::user()->haspermission('view-user-profile') || Auth::user()->haspermission('delete-user'))
-                                    <td class="text-right">
-                                        <div class="actions d-flex justify-content-start">
-                                            @can('view-user-profile')
-                                                <a href="{{ route('admin.userManagementView', ['id' => $user->id]) }}"
-                                                    class="btn btn-sm bg-secondary-light border-dark mr-1">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                            @endcan
-                                            @can('delete-user')
-                                                <form action="{{ route('admin.userManagementDestroy', ['id' => $user->id]) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class=" btn btn-sm bg-danger-light show_confirm">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            @endcan
-                                        </div>
-                                    </td>
+                                    <th>Actions</th>
                                 @endif
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $index => $user)
+                                <tr>
+                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <td>{{ $user->created_at->format('d-M-Y') }}</td>
+                                    <td><img src="{{ asset('uploads/user') }}/{{ $user->image }}" alt="user image"
+                                            class="w-25 rounded-circle"></td>
+                                    <td>{{ Str::limit($user->name, 20, '...') }}</td>
+                                    <td>{{ $user->student_id }}</td>
+                                    <td>{{ Str::limit($user->department->name, 10, '...') }}</td>
+                                    @can('edit-user')
+                                        <td>
+                                            <div class="custom-control custom-switch">
+                                                <input class="custom-control-input toggle-class" type="checkbox"
+                                                    data-id="{{ $user->id }}" id="user-{{ $user->id }}"
+                                                    {{ $user->is_active ? 'checked' : '' }}>
+                                                <label class="custom-control-label" for="user-{{ $user->id }}"></label>
+                                            </div>
+                                        </td>
+                                    @endcan
+                                    @if (Auth::user()->haspermission('view-user-profile') || Auth::user()->haspermission('delete-user'))
+                                        <td class="text-right">
+                                            <div class="actions d-flex justify-content-start">
+                                                @can('view-user-profile')
+                                                    <a href="{{ route('admin.userManagementView', ['id' => $user->id]) }}"
+                                                        class="btn btn-sm bg-secondary-light border-dark mr-1">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                @endcan
+                                                @can('delete-user')
+                                                    <form
+                                                        action="{{ route('admin.userManagementDestroy', ['id' => $user->id]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class=" btn btn-sm bg-danger-light show_confirm">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
+                                            </div>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
         </div>
     </div>
 @endsection
