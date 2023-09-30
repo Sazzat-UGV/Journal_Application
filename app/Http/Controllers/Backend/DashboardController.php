@@ -22,6 +22,8 @@ class DashboardController extends Controller
         $user=User::where('role_id',1)->count();
         $publication=Paper::count();
         $category=Category::count();
+        $users=User::with('department:id,name','semester:id,semester_name')->where('role_id',2)->select('id','name','department_id','semester_id','student_id','email','created_at')->latest('id')->limit(4)->get();
+
 
         return view('Backend.pages.dashboard',compact(
             'department',
@@ -30,6 +32,7 @@ class DashboardController extends Controller
             'user',
             'publication',
             'category',
+            'users',
         ));
     }
 }
