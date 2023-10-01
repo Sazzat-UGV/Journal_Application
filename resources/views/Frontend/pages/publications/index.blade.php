@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
 
-/* Important part */
-.modal-dialog{
-    overflow-y: initial !important
-}
-.modal-body{
-    height: 80vh;
-    overflow-x: auto;
-}
-    </style>
+        <style>
+
+            .modal-body p {
+                max-width: 100%; /* Ensure text does not overflow horizontally */
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: normal; /* Allow text to wrap */
+            }
+        </style>
+
 @endpush
 @section('content')
     <main class="container-fluid pt-3">
-        <div class="card px-5 bg-success">
+        <div class="card px-5 bg-primary">
             <h5 class="text-white text-center">You can see your publications here</h5>
         </div>
         <div class="table-responsive text-nowrap my-3">
@@ -54,7 +54,7 @@
                                 <!-- Modal -->
                                 <div class="modal fade" id="myModal-{{ $paper->id }}" tabindex="-1" role="dialog"
                                     aria-labelledby="myModal-{{ $paper->id }}Label" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+                                    <div class="modal-dialog modal-lg modal-dialog-centered "
                                         role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -65,20 +65,25 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <p><span class="text-info">Title: </span>{{ $paper->paper_title }}</p>
-                                                        <p><span class="text-info">Paper Area: </span>{{ $paper->category->category_name }}</p>
-                                                        <p><span class="text-info">Email: </span>{{ $paper->email }}</p>
-                                                        <p><span class="text-info">Authors: </span>{{ $paper->author }}</p>
-                                                        <p><span class="text-info">Abstract: </span>{{ $paper->abstract }}</p>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <p><span class="text-info">Title: </span>{{ $paper->paper_title }}</p>
+                                                                <p><span class="text-info">Paper Area: </span>{{ $paper->category->category_name }}</p>
+                                                                <p><span class="text-info">Email: </span>{{ $paper->email }}</p>
+                                                                <p><span class="text-info">Authors: </span>{{ $paper->author }}</p>
+                                                                <p><span class="text-info">Abstract: </span>{{ $paper->abstract }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <a href="{{ route('user.userManagementshowPDF', ['user_id' => $paper->user_id, 'filename' => $paper->file]) }}"
+                                                            class="btn btn-sm bg-secondary-light border-dark mr-1"
+                                                            target="_blank">
+                                                            Download
+                                                        </a>
                                                     </div>
                                                 </div>
-                                                <a href="{{ route('user.userManagementshowPDF', ['user_id' => $paper->user_id, 'filename' => $paper->file]) }}"
-                                                    class="btn btn-sm bg-secondary-light border-dark mr-1"
-                                                    target="_blank">
-                                                    Download
-                                                </a>
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"

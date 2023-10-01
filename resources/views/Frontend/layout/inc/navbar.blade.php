@@ -1,48 +1,35 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top bg-white">
-    <div class="container-fluid m-2">
-        {{-- <img class="ms-2" src="{{ asset('assets/Frontend') }}/brand/logo.jpg" alt="" width="72" height="57" /> --}}
-        <strong><a class="ms-1 navbar-brand text-success" href="{{ route('homePage') }}">UGV Journals</a></strong>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+        <a href="{{ route('homePage') }}" class="navbar-brand ml-lg-3">
+            <h2 class="m-0 text-uppercase text-primary">UGV Journal</h2>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end">
-            <!-- Use justify-content-end to align items to the right -->
-            <ul class="navbar-nav">
-                @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.PublicationCreate') }}">Publish Paper</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.PublicationIndex') }}">My Papers</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset('uploads/user') }}/{{ Auth::user()->image }}" alt="Profile Image"
+        <div class="collapse navbar-collapse justify-content-end px-lg-3" id="navbarCollapse">
+            @auth
+                <div class="navbar-nav  py-0">
+                    <a href="{{ route('user.PublicationCreate') }}" class="nav-item nav-link">Publish Paper</a>
+                    <a href="{{ route('user.PublicationIndex') }}" class="nav-item nav-link">My Papers</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown"><img
+                                src="{{ asset('uploads/user') }}/{{ Auth::user()->image }}" alt="Profile Image"
                                 class="rounded-circle" width="32" height="32">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="{{ route('user.profile') }}">My Profile</a></li>
-                            <li><a class="dropdown-item" href="{{ route('user.changePasswordPage') }}">Change Password</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a></li>
-                        </ul>
-                    </li>
-                @endauth
-                @guest
-                <li class="nav-item ">
-                    <a href="{{ route('home.registrationPage') }}" class="nav-link text-white btn btn-success rounded-3 px-4" style="margin-right:10px;">Register</a>
-                </li>
-                <li class="nav-item ">
-                    <a href="{{ route('home.loginPage') }}" class="ml-10 nav-link text-white btn btn-success rounded-3 px-4">Sign in</a>
-                </li>
-
-                @endguest
-            </ul>
+                            {{ Auth::user()->name }}</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{{ route('user.profile') }}" class="dropdown-item active">My Profile</a>
+                            <a href="{{ route('user.changePasswordPage') }}" class="dropdown-item">Change Password</a>
+                            <a href="{{ route('user.logout') }}" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            @endauth
+            @guest
+                <a
+                    href="{{ route('home.registrationPage') }}"class="btn btn-primary py-2 px-4 mr-lg-2 mr-0">Register</a><!-- Added responsive classes -->
+                <a href="{{ route('home.loginPage') }}"
+                    class="btn btn-primary py-2 px-4">Login</a><!-- Added responsive classes -->
+            @endguest
         </div>
-    </div>
-</nav>
+    </nav>
+</div>

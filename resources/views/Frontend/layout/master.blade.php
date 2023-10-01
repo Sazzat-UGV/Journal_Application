@@ -2,25 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="keyword" content="" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
     <title>@yield('title')</title>
 
     @include('Frontend.layout.inc.style')
 </head>
 
-<body class="bg-light">
-
+<body>
+    <!-- Navbar Start -->
     @include('Frontend.layout.inc.navbar')
+    <!-- Navbar End -->
+
     @yield('content')
 
-
+    <!-- Footer Start -->
     @include('Frontend.layout.inc.footer')
-
+    <!-- Footer End -->
+    <!-- JavaScript Libraries -->
     @include('Frontend.layout.inc.script')
+
 </body>
 
 </html>

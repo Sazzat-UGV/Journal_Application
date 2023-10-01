@@ -6,23 +6,23 @@ Edit Profile
 
 @endpush
 @section('content')
-<main class="container pt-5">
-    <div class="pb-2 mb-3">
-        <div class="container" style="width: 600px !important;">
-            <div class="card py-2 px-5 bg-success">
+<main class="container pt-4">
+    <div class="row">
+        <div class="col-sm-1 col-md-1 col-lg-3"></div>
+        <div class="col-sm-10 col-md-10 col-lg-6 pb-4">
+            <div class="card py-2 bg-primary">
                 <h5 class="text-white text-center">Edit Profile</h5>
             </div>
             <div class="card bg-light">
-                <form class="text-start p-5" action="{{ route('user.editProfile',['id'=>Auth::user()->id]) }}" method="POST">
+                <form class="text-start p-4" action="{{ route('user.editProfile',['id'=>Auth::user()->id]) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="container">
 
-                        <div class="col-auto mb-4">
-                            <label class="form-label text-start text-success fw-bold" for="name">Your Name <span
+                        <div class=" mb-4">
+                            <label class="form-label text-start fw-bold" for="name">Your Name <span
                                     class="text-danger fw-normal">*</span></label>
                             <input
-                                class="form-control px-4 @error('name')
+                                class="form-control @error('name')
                                 is-invalid
                             @enderror"
                                 type="text" name="name" id="name" style="height: 50px !important;"
@@ -32,11 +32,11 @@ Edit Profile
                             @enderror
                         </div>
 
-                        <div class="col-auto mb-4">
-                            <label class="form-label text-start text-success fw-bold" for="email">Your Email <span
+                        <div class=" mb-4">
+                            <label class="form-label text-start fw-bold" for="email">Your Email <span
                                     class="text-danger fw-normal">*</span></label>
                             <input
-                                class="form-control px-4 @error('email')
+                                class="form-control @error('email')
                                 is-invalid
                             @enderror"
                                 type="email" name="email" id="email"
@@ -47,11 +47,11 @@ Edit Profile
                             @enderror
                         </div>
 
-                        <div class="col-auto mb-4">
-                            <label class="form-label text-start text-success fw-bold" for="phone">Your Phone Number
+                        <div class=" mb-4">
+                            <label class="form-label text-start fw-bold" for="phone">Your Phone Number
                                 <span class="text-danger fw-normal">*</span></label>
                             <input
-                                class="form-control px-4 @error('phone')
+                                class="form-control @error('phone')
                                 is-invalid
                             @enderror"
                                 type="phone" name="phone" id="phone" value="{{ Auth::user()->phone }}"
@@ -61,11 +61,11 @@ Edit Profile
                             @enderror
                         </div>
 
-                        <div class="col-auto mb-4">
-                            <label class="form-label text-start text-success fw-bold" for="address">Your Addesss <span
+                        <div class=" mb-4">
+                            <label class="form-label text-start fw-bold" for="address">Your Addesss <span
                                     class="text-danger fw-normal">*</span></label>
                             <input
-                                class="form-control px-4 @error('address')
+                                class="form-control @error('address')
                                 is-invalid
                             @enderror"
                                 type="text" name="address" value="{{ Auth::user()->address }}" id="address"
@@ -75,11 +75,11 @@ Edit Profile
                             @enderror
                         </div>
 
-                        <div class="col-auto mb-4">
-                            <label class="form-label text-start text-success fw-bold" for="address">Department <span
+                        <div class=" mb-4">
+                            <label class="form-label text-start fw-bold" for="address">Department <span
                                     class="text-danger fw-normal">*</span></label>
                             <select
-                                class="form-select @error('department_id')
+                                class="form-select form-control @error('department_id')
                                 is-invalid
                             @enderror"
                                 name="department_id">
@@ -98,10 +98,10 @@ Edit Profile
                             @enderror
 
                         </div>
-                        <div class="col-auto mb-4">
-                            <label class="form-label text-start text-success fw-bold" for="semester_id">Semester <span
+                        <div class=" mb-4">
+                            <label class="form-label text-start fw-bold" for="semester_id">Semester <span
                                     class="text-danger fw-normal">*</span></label>
-                            <select class="form-select @error('semester_id')
+                            <select class="form-select form-control @error('semester_id')
                             is-invalid
                         @enderror" name="semester_id">
                                 <option value="">Select Semester</option>
@@ -120,14 +120,15 @@ Edit Profile
                         </div>
 
                         <div class="text-center mb-2">
-                            <button type="submit" class="btn btn-success me-4">Submit</button>
-                            <button type="reset" class="btn btn-outline-success">Clear</button>
+                            <button type="submit" class="btn btn-primary me-4">Submit</button>
+                            <button type="reset" class="btn btn-outline-primary">Clear</button>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>
+        <div class="col-sm-1 col-md-1 col-lg-3"></div>
     </div>
+
 </main>
 @endsection
 @push('user_script')

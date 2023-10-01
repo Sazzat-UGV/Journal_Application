@@ -1,13 +1,27 @@
 @extends('Frontend.layout.master')
 @section('title')
-UGV Journals
+    UGV Journals
 @endsection
 @push('user_style')
-
 @endpush
 @section('content')
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum iste repellat aliquam dignissimos ipsam nihil nobis veritatis ipsa velit eum maiores animi, quo consequatur exercitationem natus unde incidunt ratione veniam deleniti eos molestias culpa amet aliquid quae. Molestias doloremque ad facilis incidunt sequi recusandae qui odit quo, vitae beatae voluptatem mollitia sunt optio itaque alias. Veritatis dolore voluptates minus, expedita perferendis, sequi dignissimos placeat dolor temporibus ipsa iusto tempora eaque porro excepturi voluptate! Officiis vitae eaque numquam obcaecati commodi nisi, iusto corrupti animi quos ea, dolor, unde voluptatem aliquid laudantium suscipit deleniti rem ratione totam necessitatibus. Officia quis ipsam natus.
+    <div class="jumbotron jumbotron-fluid position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center my-5 py-5">
+            <h2 class="text-white mt-4 mb-4">Welcome to UGV Journal</h2>
+            <h3 class="text-white mb-5">Search for and add articles to your library</h3>
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
+                <form action="#">
+                <div class="input-group">
+                        <input type="text" class="form-control border-light" style="padding: 30px 25px;"
+                            placeholder="Keyword">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary px-4 px-lg-5">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('user_script')
-
 @endpush

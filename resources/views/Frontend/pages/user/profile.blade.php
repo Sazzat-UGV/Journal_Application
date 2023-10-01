@@ -7,10 +7,6 @@
         integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        body {
-            margin-top: 20px;
-        }
-
         .card-style1 {
             box-shadow: 0px 0px 10px 0px rgb(89 75 128 / 9%);
         }
@@ -51,10 +47,6 @@
             display: inline-block;
         }
 
-        .text-primary {
-            color: #ceaa4d !important;
-        }
-
         .text-secondary {
             color: #15395A !important;
         }
@@ -82,6 +74,11 @@
         @media screen and (min-width: 576px) {
             .p-sm-2-3 {
                 padding: 2.3rem;
+            }
+
+            .w-75 {
+                width: 100%;
+                /* Make the profile image responsive */
             }
         }
 
@@ -152,11 +149,11 @@
                 <div class="card card-style1 border-0">
                     <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                         <div class="row align-items-center">
-                            <div class="col-lg-6 mb-4 mb-lg-0 ">
+                            <div class="col-lg-6 mb-4 mb-lg-0 text-center"> <!-- Centered the image on mobile -->
                                 <img src="{{ asset('uploads/user') }}/{{ Auth::user()->image }}" alt="Profile Image"
-                                    class="w-75 rounded-full" />
-                                <div class="align-items-center">
-                                    <a href="#" class="btn btn-warning mt-4" data-toggle="modal"
+                                    class="w-75 rounded-circle img-fluid" />
+                                <div class="align-items-center mt-4 text-center text-lg-left"> <!-- Centered the button -->
+                                    <a href="#" class="btn btn-warning" data-toggle="modal"
                                         data-target="#changeImageModal">Change Image</a>
                                 </div>
                             </div>
@@ -237,8 +234,8 @@
                                                 class="display-26 text-secondary me-2 font-weight-600">Semester:</span>{{ Auth::user()->semester->semester_name }}
                                         </li>
                                     @endif
-                                    <li class="mb-2 mb-xl-3 display-28">
-
+                                    <li class="mb-2 mb-xl-3 display-28 text-center text-lg-left">
+                                        <!-- Centered the button -->
                                         <a href="{{ route('user.editProfilePage') }}" class="btn btn-warning">Edit
                                             Profile</a>
                                     </li>
@@ -253,11 +250,9 @@
 @endsection
 @push('user_script')
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
         integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script>
         $('.dropify').dropify();
     </script>
