@@ -42,13 +42,14 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $paper->created_at->format('d-M-Y') }}</td>
                             <td>{{ Str::limit($paper->paper_title, 30, '...') }}</td>
-                            <td>{{ $paper->author }}</td>
+                            <td>{{ Str::limit($paper->author, 50, '...') }}</td>
                             <td>{{ Str::limit($paper->category->category_name, 30, '...') }}</td>
                             <td>
                                 <div class="actions">
                                     <a href="#" class="btn btn-sm bg-secondary-light border-dark mr-1"
                                         data-toggle="modal" data-target="#myModal-{{ $paper->id }}">
                                         <i class="fas fa-eye"></i>
+                                        
                                     </a>
                                 </div>
                                 <!-- Modal -->

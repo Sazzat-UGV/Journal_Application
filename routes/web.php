@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ForgetPasswordController;
 use App\Http\Controllers\Frontend\PublicationController;
+use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,10 +65,15 @@ Route::prefix('')->group(function () {
     Route::post('change-password', [UserController::class, 'changePassword'])->name('user.changePassword');
 
     /*Publication route*/
-    Route::get('publicaton-create',[PublicationController::class,'create'])->name('user.PublicationCreate');
-    Route::post('publicaton-create',[PublicationController::class,'store'])->name('user.PublicationStore');
-    Route::get('publicaton-index',[PublicationController::class,'index'])->name('user.PublicationIndex');
+    Route::get('publicaton-create', [PublicationController::class, 'create'])->name('user.PublicationCreate');
+    Route::post('publicaton-create', [PublicationController::class, 'store'])->name('user.PublicationStore');
+    Route::get('publicaton-index', [PublicationController::class, 'index'])->name('user.PublicationIndex');
     Route::get('user/view-pdf/{user_id}/{filename}', [PublicationController::class, 'showPDF'])->name('user.userManagementshowPDF');
+
+    /*search route */
+    Route::post('search-result', [SearchController::class, 'homeSearch'])->name('home.search');
+    Route::post('search-result-get', [SearchController::class, 'homeSearchGet'])->name('home.searchGet');
+    Route::get('publisher-profile/{student_id}',[SearchController::class,'publisherProfile'])->name('home.publisherProfile');
 });
 
 
@@ -99,7 +105,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('role', RoleController::class);
     Route::resource('department', DepartmentController::class);
     Route::resource('semester', SemesterController::class);
-    Route::resource('category',CategoryController::class);
+    Route::resource('category', CategoryController::class);
     Route::resource('backup', BackupController::class)->only(['index', 'store', 'destroy']);
     Route::resource('publication', BackendPublicationController::class);
 
@@ -117,10 +123,9 @@ Route::prefix('admin')->group(function () {
     Route::delete('user/delete/{id}', [UserManagementController::class, 'destroy'])->name('admin.userManagementDestroy');
 
     /*System setting route*/
-    Route::get('mail-setting',[SettingController::class,'mailSettingPage'])->name('admin.mailSettingPage');
-    Route::post('mail-setting',[SettingController::class,'mailSetting'])->name('admin.mailSetting');
+    Route::get('mail-setting', [SettingController::class, 'mailSettingPage'])->name('admin.mailSettingPage');
+    Route::post('mail-setting', [SettingController::class, 'mailSetting'])->name('admin.mailSetting');
 
-     /*System backup route*/
+    /*System backup route*/
     Route::get('/backup/download/{file_name}', [BackUpcontroller::class, 'download'])->name('admin.backupDownload');
-
 });
