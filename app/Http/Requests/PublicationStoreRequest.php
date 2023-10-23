@@ -25,8 +25,10 @@ class PublicationStoreRequest extends FormRequest
             "paper_title" => "required|string|max:255",
             "author" => "required|string|max:255",
             "email" => "required|email|max:255",
+            "doi" => "required|string|max:255",
             "abstract" => "required|string|max:5000",
             "paper_area" => "required|numeric",
+            "image" => "nullable|mimes:png,jpg|max:10240",
             "file_upload" => "required|mimes:pdf",
         ];
     }

@@ -87,7 +87,8 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <p style="font-size: 12px; font-weight: 600; color: black">GENERIC OPEN ACCESS
-                                                <span class="text-danger text-bold">PDF</span></p>
+                                                <span class="text-danger text-bold">PDF</span>
+                                            </p>
                                             <h5 class="card-title">{{ $result->paper_title }}</h5>
                                             <p class="card-text">
                                                 {{ $result->author }}
@@ -102,10 +103,20 @@
                                             <p class="card-text">
                                                 {{ $result->abstract }}
                                             </p>
-                                            <hr>
-                                            <p><span style="font-weight: 600; color: black">Published by: </span><a
-                                                    href="{{ route('home.publisherProfile', ['student_id' => $result->user->id]) }}">{{ $result->user->name }}</a>
-                                            </p>
+                                            @if (isset($result->image))
+                                                <p class="">
+                                                    <img src="{{ asset('uploads/paper') }}/{{ $result->image }}"
+                                                        class="img-fluid" />
+                                                </p>
+                                                @endif
+                                                <hr>
+                                                <p><span style="font-weight: 600; color: black">Published by: </span><a
+                                                        href="{{ route('home.publisherProfile', ['student_id' => $result->user->id]) }}">{{ $result->user->name }}</a>
+                                                </p>
+                                                <p class=""><span style="font-weight: 600; color: black">Publisher
+                                                        DOI: </span><a href="https://dx.doi.org/{{ $result->doi }}"
+                                                        target="blank">{{ $result->doi }}</a>
+                                                </p>
 
                                         </div>
                                     </div>
@@ -128,7 +139,6 @@
 
         </div>
     </div>
-
 @endsection
 @push('user_script')
     <!-- Include jQuery -->

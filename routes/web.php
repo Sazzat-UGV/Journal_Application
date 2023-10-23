@@ -69,6 +69,7 @@ Route::prefix('')->group(function () {
     Route::post('publicaton-create', [PublicationController::class, 'store'])->name('user.PublicationStore');
     Route::get('publicaton-index', [PublicationController::class, 'index'])->name('user.PublicationIndex');
     Route::get('user/view-pdf/{user_id}/{filename}', [PublicationController::class, 'showPDF'])->name('user.userManagementshowPDF');
+    Route::get('active/{id}',[PublicationController::class,'paperActive'])->name('user.paperActive');
 
     /*search route */
     Route::post('search-result', [SearchController::class, 'homeSearch'])->name('home.search');

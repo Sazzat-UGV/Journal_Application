@@ -17,7 +17,7 @@ class PublicationController extends Controller
     public function index()
     {
         Gate::authorize('index-publication');
-        $papers = Paper::with('category:id,category_name', 'user:id,student_id,name')->select('id', 'paper_title', 'category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id')->latest('id')->get();
+        $papers = Paper::with('category:id,category_name', 'user:id,student_id,name')->select('id', 'paper_title', 'category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id','doi','image')->latest('id')->get();
         return view('Backend.pages.publicaition.index',compact('papers'));
     }
 

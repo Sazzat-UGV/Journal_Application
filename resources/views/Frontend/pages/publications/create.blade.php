@@ -95,6 +95,20 @@
                     </div>
 
                     <div class=" mb-4">
+                        <label class="form-label text-start fw-bold" for="doi">Doi</label>
+                        <span class="text-danger fw-normal">*</span>
+                        <input
+                            class="form-control @error('doi')
+                        is-invalid
+                    @enderror"
+                            type="text"  name="doi" id="doi" placeholder="Enter your doi"
+                            value="{{ old('doi') }}" style="height: 50px !important;">
+                        @error('doi')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+
+                    <div class=" mb-4">
                         <label class="form-label text-start fw-bold" for="file_upload">Attach Paper
                             <span class="text-danger fw-normal">*</span>
                         </label>
@@ -106,6 +120,20 @@
                             style="height: 45px !important;"
                         >
                             @error('file_upload')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                        @enderror
+                    </div>
+
+                    <div class=" mb-4">
+                        <label class="form-label text-start fw-bold" for="image">Attach Image</label>
+                            <input type="file"
+                            class="form-control @error('image') is-invalid @enderror"
+                            id="image"
+                            name="image"
+                            value="{{ old('image') }}"
+                            style="height: 45px !important;"
+                        >
+                            @error('image')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>

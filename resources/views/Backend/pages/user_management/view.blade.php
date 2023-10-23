@@ -162,17 +162,25 @@
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <div class="col-12">
-                                                                                <p><span class="text-info">Title:
+                                                                                <p><span class="text-success">Title:
                                                                                     </span>{{ $paper->paper_title }}</p>
-                                                                                <p><span class="text-info">Paper Area:
+                                                                                <p><span class="text-success">Paper Area:
                                                                                     </span>{{ $paper->category->category_name }}
                                                                                 </p>
-                                                                                <p><span class="text-info">Email:
+                                                                                <p><span class="text-success">Email:
                                                                                     </span>{{ $paper->email }}</p>
-                                                                                <p><span class="text-info">Authors:
+                                                                                <p><span class="text-success">DOI:
+                                                                                    </span><a href="https://dx.doi.org/{{ $paper->doi }}"
+                                                                                        target="blank">{{ $paper->doi }}</a></p>
+                                                                                <p><span class="text-success">Authors:
                                                                                     </span>{{ $paper->author }}</p>
-                                                                                <p><span class="text-info">Abstract:
+                                                                                <p><span class="text-success">Abstract:
                                                                                     </span>{{ $paper->abstract }}</p>
+                                                                                    @if (isset($paper->image))
+                                                                                    <p><img src="{{ asset('uploads/paper') }}/{{ $paper->image }}"
+                                                                                     alt="Image"
+                                                                                     class="img-fluid w-75 text-center" /></p>
+                                                                                    @endif
                                                                                 <a href="{{ route('admin.userManagementshowPDF', ['user_id' => $paper->user_id, 'filename' => $paper->file]) }}"
                                                                                     class="btn btn-sm bg-secondary-light border-dark mr-1"
                                                                                     target="_blank">

@@ -186,7 +186,7 @@
                                     @if (isset($user->semester))
                                         <li class="mb-2 mb-xl-3 display-28">
                                             <span
-                                                class="display-26 text-secondary me-2 font-weight-600">Semester:</span>{{ $user->semester->semester_name }}
+                                                class="display-26 text-secondary me-2 font-weight-600">Semester: </span>{{ $user->semester->semester_name }}
                                         </li>
                                     @endif
 

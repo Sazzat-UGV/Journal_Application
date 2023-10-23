@@ -24,7 +24,7 @@ class UserManagementController extends Controller
     {
         Gate::authorize('view-user-profile');
         $user = User::with('semester:id,semester_name', 'department:id,full_name')->where('id', $id)->first();
-        $papers = Paper::with('category:id,category_name', 'user:id,student_id')->where('user_id', $id)->select('id', 'paper_title', 'category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id')->latest('id')->get();
+        $papers = Paper::with('category:id,category_name', 'user:id,student_id')->where('user_id', $id)->select('id', 'paper_title', 'category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id','doi','image')->latest('id')->get();
         return view('Backend.pages.user_management.view', compact('user', 'papers'));
     }
 
