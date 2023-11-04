@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
-                <p class="m-0">Copyright &copy; <span class="text-white" >UGV Journal</span>. All
+                <p class="m-0">Copyright &copy; <span class="text-white">UGV Journal</span>. All
                     Rights Reserved.
                 </p>
             </div>

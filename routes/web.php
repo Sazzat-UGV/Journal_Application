@@ -74,7 +74,11 @@ Route::prefix('')->group(function () {
     /*search route */
     Route::post('search-result', [SearchController::class, 'homeSearch'])->name('home.search');
     Route::post('search-result-get', [SearchController::class, 'homeSearchGet'])->name('home.searchGet');
+    ROute::get('search_details/{paper_id}',[SearchController::class,'details'])->name('home.search_details');
     Route::get('publisher-profile/{student_id}',[SearchController::class,'publisherProfile'])->name('home.publisherProfile');
+    /*follow*/
+    Route::get('follow/{student_id}',[SearchController::class,'follow'])->name('home.follow');
+    Route::get('unfollow/{student_id}',[SearchController::class,'unfollow'])->name('home.unfollow');
 });
 
 

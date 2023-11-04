@@ -106,6 +106,11 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <span>Followed By: {{ $follower }}</span>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

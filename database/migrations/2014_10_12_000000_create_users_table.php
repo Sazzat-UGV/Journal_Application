@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('role_id')->constrained('roles');
             $table->foreignId('department_id')->nullable()->constrained('departments');
             $table->foreignId('semester_id')->nullable()->constrained('semesters');
+            $table->foreignId('follower_id')->nullable()->constrained('followers');
             $table->string('name');
             $table->string('slug');
             $table->string('email')->unique();

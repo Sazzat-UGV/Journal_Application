@@ -96,7 +96,6 @@
 
                     <div class=" mb-4">
                         <label class="form-label text-start fw-bold" for="doi">Doi</label>
-                        <span class="text-danger fw-normal">*</span>
                         <input
                             class="form-control @error('doi')
                         is-invalid

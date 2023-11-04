@@ -54,81 +54,28 @@
                             </div>
                         @endforeach
                     @endif
-
                 </div>
             </div>
             </form>
             <div class="col-lg-6">
                 @forelse ($searchResult as $result)
-                    <div class="card mt-5" id="showModalDiv" data-toggle="modal" data-target="#myModal-{{ $result->id }}">
-                        <div class="card-body">
-                            <p style="font-size: 12px; font-weight: 600; color: black">GENERIC OPEN ACCESS <span
-                                    class="text-danger text-bold">PDF</span></p>
-                            <h5 class="card-title">{{ $result->paper_title }}</h5>
-                            <p class="card-text">
-                                {{ $result->author }}
-                            </p>
-                            <p class="card-text">
-                                {{ Str::limit($result->abstract, 195, '...') }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="myModal-{{ $result->id }}" tabindex="-1" role="dialog"
-                        aria-labelledby="myModal-{{ $result->id }}Label">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="myModal-{{ $result->id }}Label"></h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <p style="font-size: 12px; font-weight: 600; color: black">GENERIC OPEN ACCESS
-                                                <span class="text-danger text-bold">PDF</span>
-                                            </p>
-                                            <h5 class="card-title">{{ $result->paper_title }}</h5>
-                                            <p class="card-text">
-                                                {{ $result->author }}
-                                            </p>
-                                            <a href="{{ route('user.userManagementshowPDF', ['user_id' => $result->user_id, 'filename' => $result->file]) }}"
-                                                class="btn btn-sm bg-secondary-light border-dark mr-1" target="_blank">
-                                                <i class="fas fa-file"></i> Download PDF
-                                            </a>
-
-                                            <hr>
-                                            <p style="font-size: 14px;">ABSTRACT</p>
-                                            <p class="card-text">
-                                                {{ $result->abstract }}
-                                            </p>
-                                            @if (isset($result->image))
-                                                <p class="">
-                                                    <img src="{{ asset('uploads/paper') }}/{{ $result->image }}"
-                                                        class="img-fluid" />
-                                                </p>
-                                                @endif
-                                                <hr>
-                                                <p><span style="font-weight: 600; color: black">Published by: </span><a
-                                                        href="{{ route('home.publisherProfile', ['student_id' => $result->user->id]) }}">{{ $result->user->name }}</a>
-                                                </p>
-                                                <p class=""><span style="font-weight: 600; color: black">Publisher
-                                                        DOI: </span><a href="https://dx.doi.org/{{ $result->doi }}"
-                                                        target="blank">{{ $result->doi }}</a>
-                                                </p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                        Close
-                                    </button>
-                                </div>
+                    <div class="card mt-5">
+                        <a href="{{ route('home.search_details', ['paper_id' => $result->id]) }}"
+                            style="text-decoration: none; color: black; font-size: 15px">
+                            <div class="card-body">
+                                <p style="font-size: 12px; font-weight: 600; color: black">GENERIC OPEN ACCESS <span
+                                        class="text-danger text-bold">PDF</span></p>
+                                <h5 class="card-title">{{ $result->paper_title }}</h5>
+                                <p class="card-text">
+                                    {{ $result->author }}
+                                </p>
+                                <p class="card-text">
+                                    {{ Str::limit($result->abstract, 195, '...') }}
+                                </p>
                             </div>
-                        </div>
+                        </a>
                     </div>
+
                 @empty
                     <div class=" mt-5">
                         <h5 class="e">No Result Found for this Keyword or is too short(at least 3 letters)</h5>

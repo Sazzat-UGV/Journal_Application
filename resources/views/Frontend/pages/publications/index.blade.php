@@ -88,17 +88,17 @@
                                                                     </span>{{ $paper->category->category_name }}</p>
                                                                 <p><span class="text-success">Email:
                                                                     </span>{{ $paper->email }}</p>
-                                                                <p><span class="text-success">DOI: </span><a href="https://dx.doi.org/{{ $paper->doi }}"
-                                                                    target="blank">{{ $paper->doi }}</a>
+                                                                <p><span class="text-success">DOI: </span><a
+                                                                        href="https://dx.doi.org/{{ $paper->doi }}"
+                                                                        target="blank">{{ $paper->doi }}</a>
                                                                 </p>
                                                                 <p><span class="text-success">Authors:
                                                                     </span>{{ $paper->author }}</p>
                                                                 <p><span class="text-success">Abstract:
                                                                     </span>{{ $paper->abstract }}</p>
-                                                                @if(isset($paper->image))
-                                                                <img src="{{ asset('uploads/paper') }}/{{ $paper->image }}"
-                                                                    alt="Image"
-                                                                    class="img-fluid w-75 pb-2" />
+                                                                @if (isset($paper->image))
+                                                                    <img src="{{ asset('uploads/paper') }}/{{ $paper->image }}"
+                                                                        alt="Image" class="img-fluid w-75 pb-2" />
                                                                 @endif
                                                             </div>
                                                         </div>

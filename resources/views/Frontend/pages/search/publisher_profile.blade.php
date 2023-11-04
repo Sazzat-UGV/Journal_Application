@@ -7,7 +7,6 @@
         integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-
         .card-style1 {
             box-shadow: 0px 0px 10px 0px rgb(89 75 128 / 9%);
         }
@@ -152,13 +151,14 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 mb-4 mb-lg-0 text-center"> <!-- Centered the image on mobile -->
                                 <img src="{{ asset('uploads/user') }}/{{ $user->image }}" alt="Profile Image"
-                                    class="w-75 rounded-circle img-fluid" />
+                                    class="w-50 rounded-circle img-fluid" />
                             </div>
 
                             <div class="col-lg-6 px-xl-10">
                                 <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                     <h3 class="h2 text-white mb-0">{{ $user->name }}</h3>
-                                    <span class="text-white">Publisher</span>
+                                    <p class="text-white mb-0">Publisher</p>
+
                                 </div>
                                 <ul class="list-unstyled mb-1-9">
                                     <li class="mb-2 mb-xl-3 display-28">
@@ -185,11 +185,26 @@
                                     @endif
                                     @if (isset($user->semester))
                                         <li class="mb-2 mb-xl-3 display-28">
-                                            <span
-                                                class="display-26 text-secondary me-2 font-weight-600">Semester: </span>{{ $user->semester->semester_name }}
+                                            <span class="display-26 text-secondary me-2 font-weight-600">Semester:
+                                            </span>{{ $user->semester->semester_name }}
                                         </li>
                                     @endif
+                                    <li class="mb-2 mb-xl-3 display-28">
+                                        <span class="display-26 text-secondary me-2 font-weight-600">Followed By:
+                                        </span>{{ $follower }} People
+                                    </li>
 
+
+                                    @auth
+
+                                        @if (!$followedData)
+                                            <a href="{{ route('home.follow', ['student_id' => $user->student_id]) }}"
+                                                class="btn btn-primary">Follow</a>
+                                        @elseif($followedData)
+                                            <a href="{{ route('home.unfollow', ['student_id' => $user->student_id]) }}"
+                                                class="btn btn-danger">Unfollow</a>
+                                        @endif
+                                    @endauth
                                 </ul>
                             </div>
                         </div>
