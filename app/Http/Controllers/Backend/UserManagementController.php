@@ -25,7 +25,7 @@ class UserManagementController extends Controller
     {
         Gate::authorize('view-user-profile');
         $user = User::with('semester:id,semester_name', 'department:id,full_name')->where('id', $id)->first();
-        $papers = Paper::with('category:id,category_name', 'user:id,student_id')->where('user_id', $id)->select('id', 'paper_title', 'category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id','doi','image')->latest('id')->get();
+        $papers = Paper::with('category:id,category_name', 'user:id,student_id')->where('user_id', $id)->select('id', 'paper_title', 'category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id','doi','image','publication_type')->latest('id')->get();
         $follower = Follower::where('followed_to', $user->student_id)->where('follow', 1)->count();
         return view('Backend.pages.user_management.view', compact('user', 'papers','follower'));
     }
@@ -47,7 +47,17 @@ class UserManagementController extends Controller
         $filePath = public_path('uploads/student_document/' . $student_id . '/' . $filename);
 
         if (file_exists($filePath)) {
-            return Response::file($filePath, ['Content-Type' => 'application/pdf']);
+            $fileType = mime_content_type($filePath);
+
+            if ($fileType == 'application/pdf') {
+                return response()->file($filePath, ['Content-Type' => 'application/pdf']);
+            } elseif ($fileType == 'application/zip') {
+                // If the file is a ZIP, force download
+                return response()->download($filePath, $filename, ['Content-Type' => 'application/zip']);
+            } else {
+                // Unsupported file type
+                abort(404);
+            }
         } else {
             abort(404); // File not found
         }

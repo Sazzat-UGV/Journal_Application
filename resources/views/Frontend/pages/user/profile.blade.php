@@ -152,7 +152,8 @@
                             <div class="col-lg-6 mb-4 mb-lg-0 text-center"> <!-- Centered the image on mobile -->
                                 <img src="{{ asset('uploads/user') }}/{{ Auth::user()->image }}" alt="Profile Image"
                                     class="w-50 rounded-circle img-fluid" />
-                                <div class="align-items-center mt-4 text-center text-lg-left" style="display: flex; justify-content: center"> <!-- Centered the button -->
+                                <div class="align-items-center mt-4 text-center text-lg-left"
+                                    style="display: flex; justify-content: center"> <!-- Centered the button -->
                                     <a href="#" class="btn btn-warning" data-toggle="modal"
                                         data-target="#changeImageModal">Change Image</a>
                                 </div>
@@ -204,7 +205,7 @@
                                 <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                     <h3 class="h2 text-white mb-0">{{ Auth::user()->name }}</h3>
                                     <span class="text-white">{{ Auth::user()->role->role_name }}</span>
-<span class="text-white" style="font-size: 14px">| Followed By: 0 People</span>
+                                    <span class="text-white" style="font-size: 14px">| Followed By: {{ $follower }} People</span>
                                 </div>
                                 <ul class="list-unstyled mb-1-9">
                                     <li class="mb-2 mb-xl-3 display-28">

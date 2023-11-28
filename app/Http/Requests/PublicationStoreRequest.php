@@ -28,8 +28,9 @@ class PublicationStoreRequest extends FormRequest
             "doi" => "nullable|string|max:255",
             "abstract" => "required|string|max:5000",
             "paper_area" => "required|numeric",
+            "publication_type" => "required|string",
             "image" => "nullable|mimes:png,jpg|max:10240",
-            "file_upload" => "required|mimes:pdf",
+            "file_upload" => "required|mimes:pdf,zip",
         ];
     }
 }

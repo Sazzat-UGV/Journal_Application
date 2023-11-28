@@ -10,11 +10,11 @@
             @auth
                 <div class="navbar-nav  py-0">
                     <a href="{{ route('homePage') }}" class="nav-item nav-link">Home</a>
-                    <a href="{{ route('user.PublicationCreate') }}" class="nav-item nav-link">Publish Paper</a>
+                    <a href="{{ route('user.PublicationCreate') }}" class="nav-item nav-link">New Publish </a>
                     @php
                         $paperCount = \App\Models\Paper::where('user_id', Auth::user()->id)->count();
                     @endphp
-                    <a href="{{ route('user.PublicationIndex') }}" class="nav-item nav-link">My Papers @if ($paperCount)
+                    <a href="{{ route('user.PublicationIndex') }}" class="nav-item nav-link">My Publications @if ($paperCount)
                         <span
                                 style="border: 1px solid red; background: red; padding: 1px 8px; color: white;  border-radius: 50px; font-size: 16px;">{{ $paperCount }}</span>
                         @endif

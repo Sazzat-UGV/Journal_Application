@@ -25,7 +25,7 @@ class SearchController extends Controller
             ->where(function ($query) use ($searchTerm) {
                 $query->where('paper_title', 'like', '%' . $searchTerm . '%');
             })
-            ->select('id', 'paper_title', 'author', 'abstract', 'user_id', 'file', 'created_at', 'doi', 'image')
+            ->select('id', 'paper_title', 'author', 'abstract', 'user_id', 'file', 'created_at', 'doi', 'image','publication_type')
             ->get();
 
         $years = $searchResult->pluck('created_at')->map(function ($date) {
@@ -40,7 +40,7 @@ class SearchController extends Controller
     {
         $result = Paper::with('user:id,name,student_id')->where('is_active', 1)
             ->where('id', $paper_id)
-            ->select('id', 'paper_title', 'author', 'abstract', 'user_id', 'file', 'created_at', 'doi', 'image')
+            ->select('id', 'paper_title', 'author', 'abstract', 'user_id', 'file', 'created_at', 'doi', 'image','publication_type')
             ->first();
         return view('Frontend.pages.search.search_details', compact('result'));
     }
@@ -65,7 +65,7 @@ class SearchController extends Controller
             $query->whereRaw('YEAR(created_at) IN (' . implode(',', $selectedYears) . ')');
         }
 
-        $searchResult = $query->select('id', 'paper_title', 'author', 'abstract', 'user_id', 'doi', 'image', 'file', 'created_at')
+        $searchResult = $query->select('id', 'publication_type','paper_title', 'author', 'abstract', 'user_id', 'doi', 'image', 'file', 'created_at')
             ->get();
 
         $years = $searchResult->pluck('created_at')->map(function ($date) {

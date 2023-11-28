@@ -33,6 +33,7 @@
                         <th>Paper Title</th>
                         <th>Authors</th>
                         <th>Paper Area</th>
+                        <th>Type</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -45,6 +46,8 @@
                             <td>{{ Str::limit($paper->paper_title, 30, '...') }}</td>
                             <td>{{ Str::limit($paper->author, 50, '...') }}</td>
                             <td>{{ Str::limit($paper->category->category_name, 30, '...') }}</td>
+                            <td>{{ $paper->publication_type }}</td>
+
                             <td class=".text-wrap">
                                 <a href="{{ route('user.paperActive', ['id' => $paper->id]) }}" class="btn">
                                     @if ($paper->is_active == 0)
@@ -86,6 +89,8 @@
                                                                     </span>{{ $paper->paper_title }}</p>
                                                                 <p><span class="text-success">Paper Area:
                                                                     </span>{{ $paper->category->category_name }}</p>
+                                                                <p><span class="text-success">Type:
+                                                                    </span>{{ $paper->publication_type }}</p>
                                                                 <p><span class="text-success">Email:
                                                                     </span>{{ $paper->email }}</p>
                                                                 <p><span class="text-success">DOI: </span><a

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->longText('abstract');
             $table->string('file');
+            $table->string('publication_type');
             $table->boolean('is_active')->default(true);
             $table->string('doi')->nullable();
             $table->string('image')->nullable();

@@ -172,6 +172,9 @@
                                                                                 <p><span class="text-success">Paper Area:
                                                                                     </span>{{ $paper->category->category_name }}
                                                                                 </p>
+                                                                                <p><span class="text-success">Type:
+                                                                                    </span>{{ $paper->publication_type }}
+                                                                                </p>
                                                                                 <p><span class="text-success">Email:
                                                                                     </span>{{ $paper->email }}</p>
                                                                                 <p><span class="text-success">DOI:

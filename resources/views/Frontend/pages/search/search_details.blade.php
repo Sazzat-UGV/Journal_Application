@@ -8,7 +8,11 @@
     <main class="container-fluid pt-3 pb-3 bg-light">
         <div class="container">
             <p style="font-size: 12px; font-weight: 600; color: black">GENERIC OPEN ACCESS
-                <span class="text-danger text-bold">PDF</span>
+                @if (pathinfo($result->file, PATHINFO_EXTENSION) == 'zip')
+                    <span class="text-danger text-bold">ZIP</span>
+                @else
+                    <span class="text-danger text-bold">PDF</span>
+                @endif
             </p>
             <h5 class="card-title">{{ $result->paper_title }}</h5>
             <p class="card-text">

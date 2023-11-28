@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $department=Department::count();
         $semester=Semester::count();
         $admin=User::whereNot('role_id',2)->count();
-        $user=User::where('role_id',1)->count();
+        $user=User::where('role_id',2)->count();
         $publication=Paper::count();
         $category=Category::count();
         $users=User::with('department:id,name','semester:id,semester_name')->where('role_id',2)->select('id','name','department_id','semester_id','student_id','email','created_at')->latest('id')->limit(4)->get();

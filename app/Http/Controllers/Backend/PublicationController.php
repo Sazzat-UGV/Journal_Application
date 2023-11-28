@@ -17,7 +17,7 @@ class PublicationController extends Controller
     public function index()
     {
         Gate::authorize('index-publication');
-        $papers = Paper::with('category:id,category_name', 'user:id,student_id,name')->select('id', 'paper_title', 'category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id','doi','image')->latest('id')->get();
+        $papers = Paper::with('category:id,category_name', 'user:id,student_id,name')->select('id', 'paper_title', 'publication_type','category_id', 'email', 'author', 'created_at', 'abstract', 'file', 'user_id','doi','image')->latest('id')->get();
         return view('Backend.pages.publicaition.index',compact('papers'));
     }
 
@@ -76,7 +76,17 @@ class PublicationController extends Controller
         $filePath = public_path('uploads/student_document/' . $student_id . '/' . $filename);
 
         if (file_exists($filePath)) {
-            return Response::file($filePath, ['Content-Type' => 'application/pdf']);
+            $fileType = mime_content_type($filePath);
+
+            if ($fileType == 'application/pdf') {
+                return response()->file($filePath, ['Content-Type' => 'application/pdf']);
+            } elseif ($fileType == 'application/zip') {
+                // If the file is a ZIP, force download
+                return response()->download($filePath, $filename, ['Content-Type' => 'application/zip']);
+            } else {
+                // Unsupported file type
+                abort(404);
+            }
         } else {
             abort(404); // File not found
         }

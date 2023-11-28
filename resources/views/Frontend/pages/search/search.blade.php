@@ -63,8 +63,15 @@
                         <a href="{{ route('home.search_details', ['paper_id' => $result->id]) }}"
                             style="text-decoration: none; color: black; font-size: 15px">
                             <div class="card-body">
-                                <p style="font-size: 12px; font-weight: 600; color: black">GENERIC OPEN ACCESS <span
-                                        class="text-danger text-bold">PDF</span></p>
+                                <p style="font-size: 12px; font-weight: 600; color: black">GENERIC OPEN ACCESS    @if (pathinfo($result->file, PATHINFO_EXTENSION) == 'zip')
+                                    <span
+                                                                            class="text-danger text-bold">ZIP</span>
+                                @else
+                                <span
+                                class="text-danger text-bold">PDF</span>
+                                @endif
+
+                                    </p>
                                 <h5 class="card-title">{{ $result->paper_title }}</h5>
                                 <p class="card-text">
                                     {{ $result->author }}

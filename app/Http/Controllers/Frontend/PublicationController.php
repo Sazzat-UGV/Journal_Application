@@ -18,7 +18,7 @@ class PublicationController extends Controller
 
     public function index()
     {
-        $papers = Paper::with('category:id,category_name')->where('user_id', Auth::user()->id)->select('id', 'category_id', 'paper_title', 'author', 'email', 'abstract', 'is_active','user_id','doi','file', 'image','created_at')->get();
+        $papers = Paper::with('category:id,category_name')->where('user_id', Auth::user()->id)->select('id', 'category_id', 'paper_title', 'author', 'email', 'abstract', 'is_active','user_id','doi','file', 'image','created_at','publication_type')->get();
         return view('Frontend.pages.publications.index', compact('papers'));
     }
 
@@ -35,7 +35,7 @@ class PublicationController extends Controller
         if ($request->hasFile('file_upload')) {
             $file = $request->file('file_upload');
             $fileName = $file->getClientOriginalName();
-            if ($file->getClientOriginalExtension() === 'pdf') {
+            if ($file->getClientOriginalExtension() === 'pdf'||$file->getClientOriginalExtension() === 'zip') {
                 $user = Auth::user();
                 $user_id = $user->id;
                 $student_id = $user->student_id;
@@ -61,6 +61,7 @@ class PublicationController extends Controller
                             'email' => $request->email,
                             'abstract' => $request->abstract,
                             'doi' => $request->doi,
+                            'publication_type' => $request->publication_type,
                             'category_id' => $request->paper_area,
                             'file' => $fileName,
                         ]);
@@ -83,10 +84,21 @@ class PublicationController extends Controller
         $filePath = public_path('uploads/student_document/' . $student_id . '/' . $filename);
 
         if (file_exists($filePath)) {
-            return Response::file($filePath, ['Content-Type' => 'application/pdf']);
+            $fileType = mime_content_type($filePath);
+
+            if ($fileType == 'application/pdf') {
+                return response()->file($filePath, ['Content-Type' => 'application/pdf']);
+            } elseif ($fileType == 'application/zip') {
+                // If the file is a ZIP, force download
+                return response()->download($filePath, $filename, ['Content-Type' => 'application/zip']);
+            } else {
+                // Unsupported file type
+                abort(404);
+            }
         } else {
             abort(404); // File not found
         }
+
     }
 
 

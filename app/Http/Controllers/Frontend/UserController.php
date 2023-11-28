@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Image;
 use App\Models\User;
+use App\Models\Follower;
 use App\Models\Semester;
 use App\Models\Department;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class UserController extends Controller
 {
     public function profile()
     {
-        return view('Frontend.pages.user.profile');
+        $follower = Follower::where('followed_to', Auth::user()->student_id)->where('follow', 1)->count();
+        return view('Frontend.pages.user.profile', compact('follower'));
     }
 
     public function editProfilePage()
