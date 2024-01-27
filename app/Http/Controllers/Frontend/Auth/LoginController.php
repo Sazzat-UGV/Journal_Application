@@ -31,7 +31,7 @@ class LoginController extends Controller
             'role_id' => 2,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'student_id' => $request->student_id,
+            'student_id' => $request->user_id,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,

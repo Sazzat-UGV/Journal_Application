@@ -32,15 +32,15 @@
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label text-start fw-bold" for="student_id">Your Student ID
+                                <label class="form-label text-start fw-bold" for="user_id">User ID
                                     <span class="text-danger fw-normal">*</span></label>
                                 <input
-                                    class="form-control @error('student_id')
+                                    class="form-control @error('user_id')
                                 is-invalid
                             @enderror"
-                                    type="text" name="student_id" value="{{ old('student_id') }}"id="student_id"
+                                    type="text" name="user_id" value="{{ old('user_id') }}"id="user_id"
                                     style="height: 50px !important;" placeholder="Enter your Id ">
-                                @error('student_id')
+                                @error('user_id')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
@@ -110,8 +110,7 @@
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label text-start fw-bold" for="semester_id">Semester <span
-                                        class="text-danger fw-normal">*</span></label>
+                                <label class="form-label text-start fw-bold" for="semester_id">Semester (If you are a student)</label>
                                 <select
                                     class="form-control form-select @error('semester_id')
                             is-invalid

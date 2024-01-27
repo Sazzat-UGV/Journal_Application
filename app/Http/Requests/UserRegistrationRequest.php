@@ -23,12 +23,12 @@ class UserRegistrationRequest extends FormRequest
     {
         return [
             "name" => "required|string|max:255",
-            "student_id" => "required|numeric|min:4|unique:users",
+            "user_id" =>"required|string|unique:users,student_id",
             "email" => "required|email|max:255|unique:users",
             "phone" => "required|numeric|min:11|unique:users",
             "address" => "required|string|max:255",
             "department_id" => "required|numeric",
-            "semester_id" => "required|numeric",
+            "semester_id" => "nullable|numeric",
             "password" => "required|string|confirmed",
         ];
     }

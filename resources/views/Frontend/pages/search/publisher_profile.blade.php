@@ -189,6 +189,16 @@
                                             </span>{{ $user->semester->semester_name }}
                                         </li>
                                     @endif
+                                    @php
+                                        $paperCount = \App\Models\Paper::where('user_id', $user->id)->where('is_active',1)->count();
+                                    @endphp
+                                    <li class="mb-2 mb-xl-3 display-28">
+                                        <span class="display-26 text-secondary me-2 font-weight-600">Published Paper:
+                                        </span>{{ $paperCount }} Paper
+                                    </li>
+
+
+
                                     <li class="mb-2 mb-xl-3 display-28">
                                         <span class="display-26 text-secondary me-2 font-weight-600">Followed By:
                                         </span>{{ $follower }} People
@@ -205,6 +215,10 @@
                                                 class="btn btn-danger">Unfollow</a>
                                         @endif
                                     @endauth
+                                    @if ($paperCount >= 2)
+                                        <a href="{{ route('home.allPublications', ['id' => $user->id]) }}"
+                                            class="btn btn-success">Show All Publications</a>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
