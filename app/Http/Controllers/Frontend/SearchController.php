@@ -139,4 +139,10 @@ class SearchController extends Controller
         Toastr::success("You are unfollowing..");
         return back();
     }
+
+    public function allPublications($id){
+        $papers = Paper::with('category:id,category_name')->where('user_id', $id)->select('id', 'category_id', 'paper_title','email', 'abstract', 'user_id','is_active','doi','file', 'image','created_at','publication_type')->where('is_active',1)->get();
+        $user=User::findOrFail($id);
+        return view('Frontend.pages.search.all_publication',compact('papers','user'));
+    }
 }
